@@ -1,0 +1,19 @@
+{
+  "name": "torch-ly-js-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/torch-ly/torch-ly-js-api.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/torch-ly/torch-ly-js-api/issues"
+  },
+  "homepage": "https://github.com/torch-ly/torch-ly-js-api#readme"
+}
