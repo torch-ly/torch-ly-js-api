@@ -4,9 +4,11 @@ import gql from "graphql-tag";
 import WebSocket from 'ws';
 import {WebSocketLink} from "@apollo/client/link/ws";
 import {SubscriptionClient} from "subscriptions-transport-ws";
+import logError from "../error";
 
-export async function init() {
+export let apolloClient: ApolloClient<any>;
 
+export default function initializeConnection() {
     let authID = torchly.auth.authID;
 
     const client = new SubscriptionClient(torchly.backend.url, {
@@ -32,26 +34,12 @@ export async function init() {
         },
     };
 
-    const apolloClient = new ApolloClient({
+    apolloClient = new ApolloClient({
         cache,
         // @ts-ignore
         link,
         defaultOptions,
     });
-
-    function logError(...err: any[]) {
-        console.error(err);
-    }
-
-    apolloClient.query({
-        query: gql`
-            {
-                allCharacters{pos{point{x y} rot size} name token players {id name} id details conditions}
-            }
-        `
-    }).then(({data}) => {
-        console.log(data)
-    })
-    .catch(logError);
-
 }
+
+
