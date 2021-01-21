@@ -40,7 +40,7 @@ export function addCharacter(character: Character) {
 }
 
 export function updateData(characters: { name: string; token: string; pos: { point: { x: number; y: number; }; rot: number; size: number; }; players: string[]; details: { hp: number; ac: number; notes: string; }; _id: string; conditions: string[]; }[]) {
-    torchly.characters = characters.map((
+    torchly.characters.array = characters.map((
         char: {
             name: string;
             token: string;

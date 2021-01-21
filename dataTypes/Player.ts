@@ -8,7 +8,7 @@ export class Player {
 
     getCharacters(id: string) : Character[] {
         let playerCharacters : Character[] = [];
-        for (let character of torchly.characters)
+        for (let character of torchly.characters.array)
             for (let player of character.players)
                 if (player === id)
                     playerCharacters.push(character);
