@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 import logError from "../../error";
 import {apolloClient} from "../initialize";
-import {updateData as updateCharacterData} from "./characters";
+import {updateData as updateCharacterData} from "./characters/characters";
 import {updateData as updatePlayerData, updateSelf} from "./player";
 import {torchly} from "../../index";
 

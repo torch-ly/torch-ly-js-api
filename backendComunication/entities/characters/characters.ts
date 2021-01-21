@@ -1,8 +1,8 @@
-import {apolloClient} from "../initialize";
+import {apolloClient} from "../../initialize";
 import gql from "graphql-tag";
-import logError from "../../error";
-import {torchly} from "../../index";
-import {Character} from "../../dataTypes/Character";
+import logError from "../../../error";
+import {torchly} from "../../../index";
+import {Character} from "../../../dataTypes/Character";
 
 export function getCharacters() {
     apolloClient.query({
@@ -35,6 +35,22 @@ export function addCharacter(character: Character) {
             pos: character.pos,
             players: character.players,
             details: character.details
+        }
+    }).catch(logError);
+}
+
+export function removeCharacter(characterID: string) {
+    if (characterID == null)
+        return;
+
+    apolloClient.mutate({
+        mutation: gql`
+            mutation removeCharacter($id:String!){
+                removeCharacter(id:$id)
+            }
+        `,
+        variables: {
+            id: characterID
         }
     }).catch(logError);
 }

@@ -1,5 +1,5 @@
 import {torchly} from "../index";
-import {addCharacter, getCharacters} from "../backendComunication/entities/characters";
+import {addCharacter, getCharacters, removeCharacter} from "../backendComunication/entities/characters/characters";
 import {Character} from "../dataTypes/Character";
 
 function getCharacterByID(id: string): Character | undefined {
@@ -8,6 +8,7 @@ function getCharacterByID(id: string): Character | undefined {
 
 export const apiFunctions = {
     add: addCharacter,
+    removeByID: removeCharacter,
     getByID: getCharacterByID,
-    forceUpdateCharacters: getCharacters,
+    forceUpdateCharacters: getCharacters
 }
