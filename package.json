@@ -2,9 +2,11 @@
   "name": "torch-ly-js-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "test": "npm run tests"
+    "test": "npm run tests",
+    "tsc": "tsc",
+    "run": "npm run tsc && node index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,18 @@
   "bugs": {
     "url": "https://github.com/torch-ly/torch-ly-js-api/issues"
   },
-  "homepage": "https://github.com/torch-ly/torch-ly-js-api#readme"
+  "homepage": "https://github.com/torch-ly/torch-ly-js-api#readme",
+  "dependencies": {
+    "@apollo/client": "^3.3.7",
+    "@types/ws": "^7.4.0",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link-ws": "^1.0.20",
+    "esm": "^3.2.25",
+    "graphql": "^15.4.0",
+    "graphql-tag": "^2.11.0",
+    "graphql-ws": "^4.1.1",
+    "subscriptions-transport-ws": "^0.9.18",
+    "ws": "^7.4.2"
+  }
 }
