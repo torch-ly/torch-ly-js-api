@@ -11,9 +11,9 @@ export function getCharacters() {
                 allCharacters{pos{point{x y} rot size} name token players {id name} id details conditions}
             }
         `
-    }).then(({data: {allCharacters}}) => {
-        updateData(allCharacters);
-    }).catch(logError);
+    })
+    .then(({data: {allCharacters}}) => updateData(allCharacters))
+    .catch(logError);
 }
 
 export function addCharacter(character: Character) {

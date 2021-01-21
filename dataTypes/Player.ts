@@ -6,11 +6,11 @@ export class Player {
     id: string;
     gm: boolean;
 
-    getCharacters(id: string) : Character[] {
+    getCharacters() : Character[] {
         let playerCharacters : Character[] = [];
         for (let character of torchly.characters.array)
             for (let player of character.players)
-                if (player === id)
+                if (player === this.id)
                     playerCharacters.push(character);
 
 

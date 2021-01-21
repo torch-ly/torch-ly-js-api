@@ -1,8 +1,10 @@
 import {Player} from "./dataTypes/Player"
+import {Character} from "./dataTypes/Character";
+import {InitiativeValue} from "./dataTypes/InitiativeValue";
 import initializeBackendCommunication from "./backendComunication/initialize";
 import {updateData} from "./backendComunication/entities/queryAllData";
 import {apiFunctions as characterFunctions} from "./functions/character";
-import {Character} from "./dataTypes/Character";
+import {apiFunctions as playerFunctions} from "./functions/players";
 
 export const torchly = {
 
@@ -19,22 +21,18 @@ export const torchly = {
         gm: false,
     },
 
-    players: [
-        new Player({
-            name: "Eric",
-            id: "5f2997012b10402e988db93f",
-            gm: false,
-        })
-    ],
+    players: {
+        array: <Player[]>[],
+        ...playerFunctions,
+    },
 
     characters: {
         array: <Character[]>[],
         ...characterFunctions,
     },
 
-    initiative: [
-        { id: "ebyqd2akhxla5rz", value: 22 }
-    ],
+    initiative: <InitiativeValue[]>[],
+
 
 };
 
@@ -50,4 +48,3 @@ initializeTorchly({
 
 initializeBackendCommunication();
 updateData();
-
