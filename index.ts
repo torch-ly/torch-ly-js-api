@@ -50,3 +50,8 @@ export async function initializeTorchly(config: { backendUrl: string; authID: st
 
     await updateData();
 }
+
+export const defaultConfig = {
+    backendUrl: <string> process.env.BACKEND,
+    authID: <string> process.env.AUTH_ID
+}
