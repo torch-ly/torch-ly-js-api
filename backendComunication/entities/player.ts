@@ -4,6 +4,7 @@ import {apolloClient} from "../initialize";
 import gql from "graphql-tag";
 import logError from "../../error";
 import {createPlayer} from "../../objectFactory";
+import {dataChanged} from "../../functions/players";
 
 export function getAllPlayers() {
     apolloClient.query({
@@ -18,6 +19,7 @@ export function getAllPlayers() {
 
 export function updateData(players: Player[]) {
     torchly.players.array = players.map((player: Player) => createPlayer(player));
+    players.forEach(player => dataChanged(player.id));
 }
 
 export function updateSelf(me: Player) {

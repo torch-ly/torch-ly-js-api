@@ -4,6 +4,7 @@ import logError from "../../../error";
 import {torchly} from "../../../index";
 import {Character} from "../../../dataTypes/Character";
 import {createCharacter} from "../../../objectFactory";
+import {dataChanged as callSubscribtionCallbacks} from "../../../functions/character";
 
 export function getCharacters() {
     apolloClient.query({
@@ -58,4 +59,5 @@ export function removeCharacter(characterID: string) {
 
 export function updateData(characters: Character[]) {
     torchly.characters.array = characters.map((char: Character) => createCharacter(char));
+    characters.forEach(char => callSubscribtionCallbacks(char._id));
 }
