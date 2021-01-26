@@ -26,7 +26,9 @@ export class Character {
     _id: string;
     conditions: string[];
 
-    remove() {
+    subscriptionCallbacks: Function[];
+
+    delete() {
         removeCharacter(this._id);
     };
 
@@ -38,8 +40,19 @@ export class Character {
         setCharacterPosition(this._id, point);
     };
 
-    setPlayers(players: string[] | Player[]) {
-        //TODO implement
+    subscribe(callback: Function) {
+        this.subscriptionCallbacks.push(callback);
+    };
+
+    setPlayers(players: string[]): void;
+    setPlayers(players: Player[]): void;
+    setPlayers(players: any): void {
+        if (players.length === 0)
+            setCharacterPlayers(this._id, []);
+        else if (players[0] instanceof Player)
+            setCharacterPlayers(this._id, players.map((player: Player) => player.id));
+        else
+            setCharacterPlayers(this._id, players);
     }
 
     setDetails(details: { hp: number; ac: number; notes: string; }) {
@@ -81,5 +94,6 @@ export class Character {
         this.details = character.details;
         this._id = character._id;
         this.conditions = character.conditions;
+        this.subscriptionCallbacks = [];
     }
 }
