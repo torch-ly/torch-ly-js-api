@@ -1,10 +1,9 @@
 import {apolloClient} from "./initialize";
 import gql from "graphql-tag";
 import logError from "../error";
-import {Character} from "../dataTypes/Character";
 import {torchly} from "../index";
-import {createCharacter} from "../objectFactory";
 import {InitiativeValue} from "../dataTypes/InitiativeValue";
+import {dataChanged} from "../functions/initiative";
 
 export function getInitiative() {
     apolloClient.query({
@@ -14,13 +13,11 @@ export function getInitiative() {
             }
 		`
     })
-        .then(({data}) => {
-            //store.commit("character/setInitiativeOrder", data.getInitiative.order);
-        })
+        .then(({data: {updateInitiative : {order}}}) => updateData(order))
         .catch(logError);
 }
 
-export function setInitiative() {
+export function setInitiative(initiative: InitiativeValue[]) {
     apolloClient.mutate({
         mutation: gql`
             mutation setInitiative($order:JSON!){
@@ -28,22 +25,21 @@ export function setInitiative() {
             }
 		`,
         variables: {
-            order: null //store.state.character.initiative
+            order: initiative,
         }
     }).catch(logError);
 }
 
-export function addToInitiative(id: any, value: any) {
+export function addToInitiative(initiative: InitiativeValue) {
     apolloClient.mutate({
         mutation: gql`
             mutation addInitiative($id: String!, $value: Int!) {
-                addToInitiative(id: $id, value: $value) {
-                    order
-                }
+                addToInitiative(id: $id, value: $value) {order}
             }
 		`,
         variables: {
-            id, value
+            id: initiative.id,
+            value: initiative.value,
         }
     }).catch(logError);
 }
@@ -58,11 +54,11 @@ export function subscribeInitiative() {
     }).subscribe({
         next({data: {updateInitiative : {order}}}) {
             updateData(order);
-            //TODO call subscribe callbacks
         }
     });
 }
 
 export function updateData(initiative: InitiativeValue[]) {
     torchly.initiative.array = initiative.map((ini: InitiativeValue) => new InitiativeValue(ini));
+    dataChanged();
 }
