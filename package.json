@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "npm run tests",
     "tsc": "tsc",
-    "run": "npm run tsc && node index.js"
+    "run": "npm run tsc && node -r dotenv/config try.js",
+    "test": "mocha -r ts-node/register -r dotenv/config tests/**/*.test.ts"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link-ws": "^1.0.20",
+    "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
@@ -31,5 +32,14 @@
     "subscriptions-transport-ws": "^0.9.18",
     "vue": "^2.6.12",
     "ws": "^7.4.2"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.14",
+    "@types/mocha": "^8.2.0",
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
   }
 }

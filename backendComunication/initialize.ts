@@ -11,6 +11,9 @@ export let apolloClient: ApolloClient<any>;
 export default function initializeConnection() {
     let authID = torchly.auth.authID;
 
+    if(apolloClient)
+        return;
+
     const client = new SubscriptionClient(torchly.backend.url, {
         reconnect: true,
         connectionParams: {
@@ -41,5 +44,3 @@ export default function initializeConnection() {
         defaultOptions,
     });
 }
-
-

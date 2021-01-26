@@ -45,19 +45,17 @@ export const torchly = {
 
 };
 
-export function initializeTorchly(config: { backendUrl: string; authID: string; }) {
+export async function initializeTorchly(config: { backendUrl: string; authID: string; }) {
     torchly.backend.url = config.backendUrl;
     torchly.auth.authID = config.authID;
 
     initializeBackendCommunication();
     startSubscriptions();
+
+    await updateData();
 }
 
-initializeTorchly({
-    backendUrl: "wss://server.erichier.tech:5000/graphql",
-    authID: "gm"
-})
-
-updateData();
-
-console.log("End")
+export const defaultConfig = {
+    backendUrl: <string> process.env.BACKEND,
+    authID: <string> process.env.AUTH_ID
+}
