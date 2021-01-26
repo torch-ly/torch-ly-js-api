@@ -12,6 +12,17 @@ function subscribeChanges(id: string, callback: Function) {
     subscriptionCallbacks.push({id, callback});
 }
 
+export function dataChanged(characterID: string) {
+
+    let character = getCharacterByID(characterID);
+
+    subscriptionCallbacks
+        .filter((sub) => sub.id === characterID)
+        .forEach((sub) => sub.callback(character));
+
+    character?.subscriptionCallbacks.forEach((func) => func(character));
+}
+
 export const apiFunctions = {
     add: addCharacter,
     removeByID: removeCharacter,
