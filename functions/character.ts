@@ -12,6 +12,10 @@ function subscribeChanges(id: string, callback: Function) {
     subscriptionCallbacks.push({id, callback});
 }
 
+function unsubscribeChanges(id: string, callback: Function) {
+    subscriptionCallbacks = subscriptionCallbacks.filter(func => func.id === id && func.callback === callback);
+}
+
 export function dataChanged(characterID: string) {
 
     let character = getCharacterByID(characterID);
@@ -29,4 +33,5 @@ export const apiFunctions = {
     getByID: getCharacterByID,
     forceUpdateCharacters: getCharacters,
     subscribeChanges,
+    unsubscribeChanges,
 }

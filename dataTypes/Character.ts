@@ -5,8 +5,9 @@ import {
     setCharacterPosition
 } from "../backendComunication/entities/characters/characterAttributes";
 import {Player} from "./Player";
+import {Subscribable} from "./Subscribable";
 
-export class Character {
+export class Character extends Subscribable {
     name: string;
     token: string;
     pos: {
@@ -26,8 +27,6 @@ export class Character {
     _id: string;
     conditions: string[];
 
-    subscriptionCallbacks: Function[];
-
     delete() {
         removeCharacter(this._id);
     };
@@ -38,10 +37,6 @@ export class Character {
 
     setPosition(point: {x: number, y: number}) {
         setCharacterPosition(this._id, point);
-    };
-
-    subscribe(callback: Function) {
-        this.subscriptionCallbacks.push(callback);
     };
 
     setPlayers(players: string[]): void;
@@ -87,6 +82,7 @@ export class Character {
         _id: string;
         conditions: string[];
     } ) {
+        super();
         this.name = character.name;
         this.token = character.token;
         this.pos = character.pos;
