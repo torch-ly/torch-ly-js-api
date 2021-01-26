@@ -3,7 +3,6 @@ import logError from "../../error";
 import {apolloClient} from "../initialize";
 import {updateData as updateCharacterData} from "./characters/characters";
 import {updateData as updatePlayerData, updateSelf} from "./player";
-import {torchly} from "../../index";
 
 export function updateData() {
     apolloClient.query({

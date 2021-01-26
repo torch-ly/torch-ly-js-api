@@ -34,6 +34,10 @@ export const torchly = {
 
     initiative: <InitiativeValue[]>[],
 
+    config: {
+        vue: true,
+    },
+
 
 };
 

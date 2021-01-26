@@ -3,6 +3,7 @@ import {Player} from "../../dataTypes/Player";
 import {apolloClient} from "../initialize";
 import gql from "graphql-tag";
 import logError from "../../error";
+import {createPlayer} from "../../objectFactory";
 
 export function getAllPlayers() {
     apolloClient.query({
@@ -21,7 +22,7 @@ export function updateData(players: { name: string; id: string; gm: boolean; }[]
             name: string;
             id: string;
             gm: boolean;
-        }) => new Player(player));
+        }) => createPlayer(player));
 }
 
 export function updateSelf(me: {name: string, id: string, gm: boolean}) {

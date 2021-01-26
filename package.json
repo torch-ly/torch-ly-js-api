@@ -29,6 +29,7 @@
     "graphql-tag": "^2.11.0",
     "graphql-ws": "^4.1.1",
     "subscriptions-transport-ws": "^0.9.18",
+    "vue": "^2.6.12",
     "ws": "^7.4.2"
   }
 }

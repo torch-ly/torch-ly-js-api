@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import {torchly} from "../../../index";
 import {Character} from "../../../dataTypes/Character";
 import {dataChanged as callSubscribtionCallbacks} from "../../../functions/character";
+import {createCharacter} from "../../../objectFactory";
 
 export function subscribeCharacter() {
     apolloClient.subscribe({
@@ -14,7 +15,7 @@ export function subscribeCharacter() {
     }).subscribe({
         next({data: {updateCharacter}}) {
             torchly.characters.array = torchly.characters.array.filter((char) => char._id !== updateCharacter.id);
-            torchly.characters.array.push(new Character(updateCharacter));
+            torchly.characters.array.push(createCharacter(updateCharacter));
             torchly.characters.array.sort((a, b) => a.name.localeCompare(b.name));
             callSubscribtionCallbacks(updateCharacter.id);
         }

@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import logError from "../../../error";
 import {torchly} from "../../../index";
 import {Character} from "../../../dataTypes/Character";
+import {createCharacter} from "../../../objectFactory";
 
 export function getCharacters() {
     apolloClient.query({
@@ -65,5 +66,5 @@ export function updateData(characters: { name: string; token: string; pos: { poi
             details: { hp: number; ac: number; notes: string; };
             _id: string;
             conditions: string[];
-        }) => new Character(char));
+        }) => createCharacter(char));
 }
