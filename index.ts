@@ -6,6 +6,7 @@ import startSubscriptions from "./backendComunication/startSubscriptions";
 import {updateData} from "./backendComunication/entities/queryAllData";
 import {apiFunctions as characterFunctions} from "./functions/character";
 import {apiFunctions as playerFunctions} from "./functions/players";
+import {apiFunctions as initiativeFunctions} from "./functions/initiative";
 
 export const torchly = {
 
@@ -32,7 +33,10 @@ export const torchly = {
         ...characterFunctions,
     },
 
-    initiative: <InitiativeValue[]>[],
+    initiative: {
+        array: <InitiativeValue[]>[],
+        ...initiativeFunctions,
+    },
 
     config: {
         vue: true,
