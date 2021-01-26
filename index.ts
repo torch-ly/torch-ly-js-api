@@ -41,6 +41,7 @@ export function initializeTorchly(config: { backendUrl: string; authID: string; 
     torchly.backend.url = config.backendUrl;
     torchly.auth.authID = config.authID;
 
+    initializeBackendCommunication();
     startSubscriptions();
 }
 
@@ -49,5 +50,6 @@ initializeTorchly({
     authID: "gm"
 })
 
-initializeBackendCommunication();
 updateData();
+
+console.log("End")

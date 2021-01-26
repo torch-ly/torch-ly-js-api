@@ -15,7 +15,7 @@ export function subscribeCharacter() {
             torchly.characters.array = torchly.characters.array.filter((char) => char._id !== updateCharacter.id);
             torchly.characters.array.push(new Character(updateCharacter));
             torchly.characters.array.sort((a, b) => a.name.localeCompare(b.name));
-            //TODO emit change event
+            torchly.characters.getByID(updateCharacter.id)?.subscriptionCallbacks.forEach((callback: Function) => callback());
         }
     });
 }
