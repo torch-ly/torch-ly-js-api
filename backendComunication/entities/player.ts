@@ -16,16 +16,11 @@ export function getAllPlayers() {
     .catch(logError);
 }
 
-export function updateData(players: { name: string; id: string; gm: boolean; }[]) {
-    torchly.players.array = players.map((
-        player: {
-            name: string;
-            id: string;
-            gm: boolean;
-        }) => createPlayer(player));
+export function updateData(players: Player[]) {
+    torchly.players.array = players.map((player: Player) => createPlayer(player));
 }
 
-export function updateSelf(me: {name: string, id: string, gm: boolean}) {
+export function updateSelf(me: Player) {
     torchly.auth.name = me.name;
     torchly.auth.playerID = me.id;
     torchly.auth.gm = me.gm;

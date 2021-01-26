@@ -56,15 +56,6 @@ export function removeCharacter(characterID: string) {
     }).catch(logError);
 }
 
-export function updateData(characters: { name: string; token: string; pos: { point: { x: number; y: number; }; rot: number; size: number; }; players: string[]; details: { hp: number; ac: number; notes: string; }; _id: string; conditions: string[]; }[]) {
-    torchly.characters.array = characters.map((
-        char: {
-            name: string;
-            token: string;
-            pos: { point: { x: number; y: number; }; rot: number; size: number; };
-            players: string[];
-            details: { hp: number; ac: number; notes: string; };
-            _id: string;
-            conditions: string[];
-        }) => createCharacter(char));
+export function updateData(characters: Character[]) {
+    torchly.characters.array = characters.map((char: Character) => createCharacter(char));
 }
