@@ -12,7 +12,7 @@ export function getAllPlayers() {
                 allPlayers {id name gm}
             }`
     })
-    .then(({data: {allPlayers}}) => updateSelf(allPlayers))
+    .then(({data: {allPlayers}}) => updateData(allPlayers))
     .catch(logError);
 }
 
