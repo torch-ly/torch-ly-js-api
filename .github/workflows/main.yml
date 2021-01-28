@@ -37,5 +37,5 @@ jobs:
       - name: Running tests
         run: npm test
         env: 
-          BACKEND=ws://localhost:5000/graphql
-          AUTH_ID=gm
+          BACKEND: ws://localhost:5000/graphql
+          AUTH_ID: gm
