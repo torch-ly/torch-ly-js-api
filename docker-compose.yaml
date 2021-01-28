@@ -1,0 +1,12 @@
+version: '3'
+services:
+  mongodb:
+    image: 'mongo'
+  torch-ly-backend:
+    build: https://github.com/torch-ly/torch-ly-backend.git
+    restart: unless-stopped
+    environment:
+      - DB=mongodb://mongodb:27017/torch-ly-backend
+      - GM=5f2997012b10402e988db93f,5f2983d7599a67fb4618c93a
+    ports: 
+      - 5000:5000
