@@ -1,7 +1,6 @@
 import {apolloClient} from "../../initialize";
 import gql from "graphql-tag";
 import {torchly} from "../../../index";
-import {Character} from "../../../dataTypes/Character";
 import {dataChanged as callSubscribtionCallbacks} from "../../../functions/character";
 import {createCharacter} from "../../../objectFactory";
 
