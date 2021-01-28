@@ -16,3 +16,7 @@ describe('character',  () => {
 
     });
 });
+
+after(() => {
+    torchly.closeConnections();
+})
