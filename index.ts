@@ -11,8 +11,6 @@ import { closeConnections } from "./backendComunication/initialize";
 
 export const torchly = {
 
-    initialized: false,
-
     backend: {
         url: ""
     },

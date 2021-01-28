@@ -6,15 +6,19 @@ import logError from "../../error";
 import {createPlayer} from "../../objectFactory";
 import {dataChanged} from "../../functions/players";
 
-export function getAllPlayers() {
-    apolloClient.query({
-        query: gql`
+export async function getAllPlayers() {
+    try {
+        const {data: {allPlayers}} = await apolloClient.query({
+            query: gql`
             {
                 allPlayers {id name gm}
             }`
-    })
-    .then(({data: {allPlayers}}) => updateData(allPlayers))
-    .catch(logError);
+        });
+
+        updateData(allPlayers);
+    } catch (e) {
+        logError(e);
+    }
 }
 
 export function updateData(players: Player[]) {
