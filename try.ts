@@ -1,5 +1,5 @@
 import {defaultConfig, initializeTorchly} from "./index";
 
-initializeTorchly(defaultConfig)
+initializeTorchly(defaultConfig);
 
-console.log("End")
+console.log("End");

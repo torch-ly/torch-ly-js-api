@@ -13,10 +13,13 @@ export function subscribeCharacter() {
         `
     }).subscribe({
         next({data: {updateCharacter}}) {
-            torchly.characters.array = torchly.characters.array.filter((char) => char._id !== updateCharacter.id);
+            //TODO change id anywhere to _id
+            updateCharacter._id = updateCharacter.id;
+            updateCharacter.id = undefined;
+            torchly.characters.array = torchly.characters.array.filter((char) => char._id.localeCompare(updateCharacter._id));
             torchly.characters.array.push(createCharacter(updateCharacter));
             torchly.characters.array.sort((a, b) => a.name.localeCompare(b.name));
-            callSubscribtionCallbacks(updateCharacter.id);
+            callSubscribtionCallbacks(updateCharacter._id);
         }
     });
 }

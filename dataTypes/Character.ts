@@ -1,6 +1,9 @@
 import {removeCharacter} from "../backendComunication/entities/characters/characters";
 import {
-    setCharacterAttrs, setCharacterConditions, setCharacterDetails, setCharacterName,
+    setCharacterAttrs,
+    setCharacterConditions,
+    setCharacterDetails,
+    setCharacterName,
     setCharacterPlayers,
     setCharacterPosition
 } from "../backendComunication/entities/characters/characterAttributes";
@@ -27,15 +30,15 @@ export class Character extends Subscribable {
     _id: string;
     conditions: string[];
 
-    delete() {
-        removeCharacter(this._id);
+    async delete() {
+        await removeCharacter(this._id);
     };
 
-    setAttrs(rot: number, size:  number) {
+    setAttrs(rot: number, size: number) {
         setCharacterAttrs(this._id, rot, size);
     };
 
-    setPosition(point: {x: number, y: number}) {
+    setPosition(point: { x: number, y: number }) {
         setCharacterPosition(this._id, point);
     };
 

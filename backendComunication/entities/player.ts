@@ -27,6 +27,7 @@ export function updateData(players: Player[]) {
 }
 
 export function updateSelf(me: Player) {
+    if (!me) return;
     torchly.auth.name = me.name;
     torchly.auth.playerID = me.id;
     torchly.auth.gm = me.gm;

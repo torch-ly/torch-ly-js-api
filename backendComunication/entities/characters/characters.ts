@@ -70,6 +70,21 @@ export async function removeCharacter(characterID: string) {
 }
 
 export function updateData(characters: Character[]) {
-    torchly.characters.array = characters.map((char: Character) => createCharacter(char));
+    //torchly.characters.array.push(...characters.map((char: Character) => createCharacter(char)));
+
+    for (let char of characters) {
+        let oldCharacter = torchly.characters.getByID(char._id);
+        if (oldCharacter) {
+            oldCharacter.name = char.name;
+            oldCharacter.token = char.token;
+            oldCharacter.pos = char.pos;
+            oldCharacter.players = char.players;
+            oldCharacter.details = char.details;
+            oldCharacter.conditions = char.conditions;
+        } else {
+            torchly.characters.array.push(createCharacter(char));
+        }
+    }
+
     characters.forEach(char => callSubscribtionCallbacks(char._id));
 }
