@@ -12,7 +12,8 @@ before(function (done) {
     }).catch(() => done());
 });
 
-describe('character-tests', () => {
+describe('', () => {
+
     it('character array is empty', (done) => {
 
         try {
@@ -122,7 +123,12 @@ describe('character-tests', () => {
                 setTimeout(() => {
                     assert(torchly.characters.array[0].players.length === 1 &&
                         torchly.characters.array[0].players[0] === torchly.players.array[0].id);
-                    res(null);
+
+                    torchly.players.array[0].delete(); // delete to clean up array
+
+                    setTimeout(() => {
+                        res(null);
+                    }, 100);
                 }, 100);
             }, 100);
 

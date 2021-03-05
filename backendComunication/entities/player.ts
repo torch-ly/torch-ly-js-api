@@ -28,10 +28,27 @@ export async function addPlayer(player: Player) {
             mutation addPlayer($name:String!, $gm:Boolean){
                 addPlayer(name:$name, gm:$gm) {name id gm}
             }
-        `,
+            `,
             variables: {
                 name: player.name,
                 gm: player.gm
+            }
+        });
+    } catch (e) {
+        logError(e);
+    }
+}
+
+export async function removePlayer(id: string) {
+    try {
+        await apolloClient.mutate({
+            mutation: gql`
+                mutation removePlayer($id:String!){
+                    removePlayer(id:$id)
+                }
+            `,
+            variables: {
+                id,
             }
         });
     } catch (e) {
@@ -48,9 +65,23 @@ export function subscribePlayer() {
         `
     }).subscribe({
         next({data: {updatePlayer}}) {
-            torchly.players.array.filter((player) => player.id !== updatePlayer.id);
+            torchly.players.array = torchly.players.array.filter((player) => player.id !== updatePlayer.id);
             torchly.players.array.push(createPlayer(updatePlayer));
             torchly.players.array.sort((a, b) => a.name.localeCompare(b.name));
+        }
+    });
+}
+
+export function subscribeRemovePlayer() {
+    apolloClient.subscribe({
+        query: gql`
+            subscription {
+                removePlayer
+            }
+        `
+    }).subscribe({
+        next({data: {removePlayer}}) {
+            torchly.players.array = torchly.players.array.filter((player) => player.id !== removePlayer);
         }
     });
 }
