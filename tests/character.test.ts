@@ -134,10 +134,10 @@ describe('character-tests', () => {
     it('remove and wait for subscription', (done) => {
         new Promise((res) => {
 
-            //torchly.characters.array[0].delete();
+            torchly.characters.array[0].delete();
 
             setTimeout(() => {
-                //assert(torchly.characters.array.length === 0);
+                assert(torchly.characters.array.length === 0);
                 res(null);
             }, 100);
 
