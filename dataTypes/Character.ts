@@ -9,6 +9,8 @@ import {
 } from "../backendComunication/entities/characters/characterAttributes";
 import {Player} from "./Player";
 import {Subscribable} from "./Subscribable";
+import {addToInitiative} from "../backendComunication/initiative";
+import {InitiativeValue} from "./InitiativeValue";
 
 export class Character extends Subscribable {
     name: string;
@@ -65,7 +67,14 @@ export class Character extends Subscribable {
         setCharacterName(this._id, name);
     }
 
-    constructor( character: {
+    setInitiative(value: number) {
+        addToInitiative(new InitiativeValue({
+            value,
+            id: this._id
+        }));
+    }
+
+    constructor(character: {
         name: string;
         token: string;
         pos: {

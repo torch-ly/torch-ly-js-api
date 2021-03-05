@@ -1,5 +1,6 @@
 import {InitiativeValue} from "../dataTypes/InitiativeValue";
 import {torchly} from "../index";
+import {orderInitiative} from "../backendComunication/initiative";
 
 let subscriptionCallbacks = <Function[]>[];
 
@@ -23,6 +24,10 @@ function unsubscribeChanges(callback: Function) {
     subscriptionCallbacks = subscriptionCallbacks.filter((func: Function) => func === callback);
 }
 
+function sort() {
+    orderInitiative();
+}
+
 export function dataChanged() {
 
     subscriptionCallbacks.forEach((ini: Function) => ini(torchly.initiative.array));
@@ -38,4 +43,5 @@ export const apiFunctions = {
     getByID: getInitiativeByCharacterID,
     subscribeChanges,
     unsubscribeChanges,
+    sort,
 }

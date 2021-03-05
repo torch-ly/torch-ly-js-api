@@ -28,10 +28,26 @@ export async function setInitiative(initiative: InitiativeValue[]) {
             mutation setInitiative($order:JSON!){
                 updateInitiative(order:$order) {order}
             }
-		`,
+            `,
             variables: {
                 order: initiative,
             }
+        });
+    } catch (e) {
+        logError(e);
+    }
+}
+
+export async function orderInitiative() {
+    console.log(10)
+    try {
+        await apolloClient.mutate({
+            mutation: gql`
+                mutation {
+                    orderInitiative {order}
+                }
+            `,
+            variables: {}
         });
     } catch (e) {
         logError(e);
@@ -42,10 +58,10 @@ export async function addToInitiative(initiative: InitiativeValue) {
     try {
         await apolloClient.mutate({
             mutation: gql`
-            mutation addInitiative($id: String!, $value: Int!) {
-                addToInitiative(id: $id, value: $value) {order}
-            }
-		`,
+                mutation addInitiative($id: String!, $value: Int!) {
+                    addToInitiative(id: $id, value: $value) {order}
+                }
+            `,
             variables: {
                 id: initiative.id,
                 value: initiative.value,
