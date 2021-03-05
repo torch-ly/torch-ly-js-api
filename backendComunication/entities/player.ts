@@ -21,7 +21,7 @@ export async function getAllPlayers() {
     }
 }
 
-export async function addPlayer(name: string, gm = false) {
+export async function addPlayer(player: Player) {
     try {
         await apolloClient.mutate({
             mutation: gql`
@@ -30,8 +30,8 @@ export async function addPlayer(name: string, gm = false) {
             }
         `,
             variables: {
-                name: name,
-                gm: gm
+                name: player.name,
+                gm: player.gm
             }
         });
     } catch (e) {

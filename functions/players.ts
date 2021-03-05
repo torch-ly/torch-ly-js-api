@@ -1,4 +1,4 @@
-import {getAllPlayers} from "../backendComunication/entities/player";
+import {addPlayer, getAllPlayers} from "../backendComunication/entities/player";
 import {Character} from "../dataTypes/Character";
 import {torchly} from "../index";
 import {Player} from "../dataTypes/Player";
@@ -48,4 +48,5 @@ export const apiFunctions = {
     subscriptionCallbacks,
     unsubscribeChanges,
     dataChanged,
+    add: addPlayer,
 }
