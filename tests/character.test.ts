@@ -2,6 +2,7 @@ import {defaultConfig, initializeTorchly, torchly} from "../index";
 import {addCharacter} from "../backendComunication/entities/characters/characters";
 import {Character} from "../dataTypes/Character";
 import {addPlayer} from "../backendComunication/entities/player";
+import {Player} from "../dataTypes/Player";
 
 const assert = require('assert');
 
@@ -109,7 +110,11 @@ describe('character-tests', () => {
     it('change players', (done) => {
         new Promise((res) => {
 
-            addPlayer("Test Player");
+            addPlayer(new Player({
+                name: "test character",
+                gm: false,
+                id: "",
+            }));
 
             setTimeout(() => {
                 torchly.characters.array[0].setPlayers([torchly.players.array[0].id]);
