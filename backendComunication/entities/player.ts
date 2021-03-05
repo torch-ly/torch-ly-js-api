@@ -21,6 +21,40 @@ export async function getAllPlayers() {
     }
 }
 
+export async function addPlayer(name: string, gm = false) {
+    try {
+        await apolloClient.mutate({
+            mutation: gql`
+            mutation addPlayer($name:String!, $gm:Boolean){
+                addPlayer(name:$name, gm:$gm) {name id gm}
+            }
+        `,
+            variables: {
+                name: name,
+                gm: gm
+            }
+        });
+    } catch (e) {
+        logError(e);
+    }
+}
+
+export function subscribePlayer() {
+    apolloClient.subscribe({
+        query: gql`
+            subscription {
+                updatePlayer {name id gm}
+            }
+        `
+    }).subscribe({
+        next({data: {updatePlayer}}) {
+            torchly.players.array.filter((player) => player.id !== updatePlayer.id);
+            torchly.players.array.push(createPlayer(updatePlayer));
+            torchly.players.array.sort((a, b) => a.name.localeCompare(b.name));
+        }
+    });
+}
+
 export function updateData(players: Player[]) {
     torchly.players.array = players.map((player: Player) => createPlayer(player));
     players.forEach(player => dataChanged(player.id));

@@ -18,6 +18,8 @@ export async function updateData() {
             `
         });
 
+        allCharacters.forEach((char: any) => char._id = char.id);
+
         updateCharacterData(allCharacters);
         updateSelf(me);
         updatePlayerData(allPlayers);

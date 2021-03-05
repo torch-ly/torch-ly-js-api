@@ -11,11 +11,13 @@ export async function getCharacters() {
         const {data: {allCharacters}} = await apolloClient.query({
             query: gql`
             {
-                allCharacters{pos{point{x y} rot size} name token players {id name} id details conditions}
+                allCharacters{pos{point{x y} rot size} name token players {id} id details conditions}
             }
         `
         });
 
+        allCharacters.forEach((char: any) => char._id = char.id);
+        allCharacters.forEach((char: any) => char.players = char.players.map((player: any) => player.id));
         updateData(allCharacters);
     } catch (e) {
         logError(e);

@@ -31,7 +31,7 @@ function unsubscribeChanges(id: string, callback: Function) {
 }
 
 export function dataChanged(playerID: string) {
-    console.error("Player subscribtions are currently not available!");
+    // console.error("Player subscribtions are currently not available!");
     let player = getPlayerByID(playerID);
 
     subscriptionCallbacks
