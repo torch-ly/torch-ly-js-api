@@ -38,33 +38,45 @@ export class Character extends Subscribable {
 
     setAttrs(rot: number, size: number) {
         setCharacterAttrs(this._id, rot, size);
+
+        return this;
     };
 
     setPosition(point: { x: number, y: number }) {
         setCharacterPosition(this._id, point);
+
+        return this;
     };
 
-    setPlayers(players: string[]): void;
-    setPlayers(players: Player[]): void;
-    setPlayers(players: any): void {
+    setPlayers(players: string[]): Character;
+    setPlayers(players: Player[]): Character;
+    setPlayers(players: any): Character {
         if (players.length === 0)
             setCharacterPlayers(this._id, []);
         else if (players[0] instanceof Player)
             setCharacterPlayers(this._id, players.map((player: Player) => player.id));
         else
             setCharacterPlayers(this._id, players);
+
+        return this;
     }
 
     setDetails(details: { hp: number; ac: number; notes: string; }) {
-        setCharacterDetails(this._id, details)
+        setCharacterDetails(this._id, details);
+
+        return this;
     }
 
     setConditions(conditions: string[]) {
-        setCharacterConditions(this._id, conditions)
+        setCharacterConditions(this._id, conditions);
+
+        return this;
     }
 
     setName(name: string) {
         setCharacterName(this._id, name);
+
+        return this;
     }
 
     setInitiative(value: number) {
@@ -72,6 +84,8 @@ export class Character extends Subscribable {
             value,
             id: this._id
         }));
+
+        return this;
     }
 
     constructor(character: {
