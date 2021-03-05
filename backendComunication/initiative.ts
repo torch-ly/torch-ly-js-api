@@ -39,12 +39,26 @@ export async function setInitiative(initiative: InitiativeValue[]) {
 }
 
 export async function orderInitiative() {
-    console.log(10)
     try {
         await apolloClient.mutate({
             mutation: gql`
                 mutation {
                     orderInitiative {order}
+                }
+            `,
+            variables: {}
+        });
+    } catch (e) {
+        logError(e);
+    }
+}
+
+export async function nextInitiativeTurn() {
+    try {
+        await apolloClient.mutate({
+            mutation: gql`
+                mutation {
+                    nextTurn {order}
                 }
             `,
             variables: {}

@@ -1,6 +1,6 @@
 import {InitiativeValue} from "../dataTypes/InitiativeValue";
 import {torchly} from "../index";
-import {orderInitiative} from "../backendComunication/initiative";
+import {nextInitiativeTurn, orderInitiative} from "../backendComunication/initiative";
 
 let subscriptionCallbacks = <Function[]>[];
 
@@ -28,6 +28,10 @@ function sort() {
     orderInitiative();
 }
 
+function nextTurn() {
+    nextInitiativeTurn();
+}
+
 export function dataChanged() {
 
     subscriptionCallbacks.forEach((ini: Function) => ini(torchly.initiative.array));
@@ -44,4 +48,5 @@ export const apiFunctions = {
     subscribeChanges,
     unsubscribeChanges,
     sort,
+    nextTurn,
 }
