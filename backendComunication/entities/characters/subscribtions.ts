@@ -14,11 +14,29 @@ export function subscribeCharacter() {
     }).subscribe({
         next({data: {updateCharacter}}) {
             //TODO change id anywhere to _id
+
+            // rename some properties
             updateCharacter._id = updateCharacter.id;
             updateCharacter.players = updateCharacter.players.map((player: any) => player.id);
+
+            // delete old character //
+
+            // save copy of old subscribtions
+            let subscribtionFunctions = [...(torchly.characters.getByID(updateCharacter._id)?.subscriptionCallbacks || [])];
+
+            // remove old character
             torchly.characters.array = torchly.characters.array.filter((char) => char._id !== updateCharacter._id);
+
+            // create new character
             torchly.characters.array.push(createCharacter(updateCharacter));
+
+            // add subscribtions of old character to the new one (ts ignore cause left side can not be undefined)
+            // @ts-ignore
+            torchly.characters.getByID(updateCharacter._id).subscriptionCallbacks = subscribtionFunctions;
+
+            // sort characters by name
             torchly.characters.array.sort((a, b) => a.name.localeCompare(b.name));
+
             callSubscribtionCallbacks(updateCharacter._id);
         }
     });

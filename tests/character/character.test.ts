@@ -1,16 +1,10 @@
-import {defaultConfig, initializeTorchly, torchly} from "../index";
-import {addCharacter} from "../backendComunication/entities/characters/characters";
-import {Character} from "../dataTypes/Character";
-import {addPlayer} from "../backendComunication/entities/player";
-import {Player} from "../dataTypes/Player";
+import {torchly} from "../../index";
+import {addCharacter} from "../../backendComunication/entities/characters/characters";
+import {Character} from "../../dataTypes/Character";
+import {addPlayer} from "../../backendComunication/entities/player";
+import {Player} from "../../dataTypes/Player";
 
 const assert = require('assert');
-
-before(function (done) {
-    initializeTorchly(defaultConfig).then(() => {
-        done();
-    }).catch(() => done());
-});
 
 describe('', () => {
 
@@ -152,7 +146,3 @@ describe('', () => {
             .catch((err) => done(err));
     });
 });
-
-after(() => {
-    torchly.closeConnections();
-})

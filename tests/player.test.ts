@@ -1,14 +1,8 @@
-import {defaultConfig, initializeTorchly, torchly} from "../index";
+import {torchly} from "../index";
 import {addPlayer} from "../backendComunication/entities/player";
 import {Player} from "../dataTypes/Player";
 
 const assert = require('assert');
-
-before(function (done) {
-    initializeTorchly(defaultConfig).then(() => {
-        done();
-    }).catch(() => done());
-});
 
 describe('', () => {
 
@@ -56,8 +50,4 @@ describe('', () => {
             .then(() => done())
             .catch((err) => done(err));
     });
-});
-
-after(() => {
-    torchly.closeConnections();
 });

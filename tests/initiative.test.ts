@@ -1,14 +1,8 @@
-import {defaultConfig, initializeTorchly, torchly} from "../index";
+import {torchly} from "../index";
 import {addCharacter} from "../backendComunication/entities/characters/characters";
 import {Character} from "../dataTypes/Character";
 
 const assert = require('assert');
-
-before(function (done) {
-    initializeTorchly(defaultConfig).then(() => {
-        done();
-    }).catch(() => done());
-});
 
 describe('', () => {
 
@@ -122,8 +116,4 @@ describe('', () => {
             .then(() => done())
             .catch((err) => done(err));
     });
-});
-
-after(() => {
-    torchly.closeConnections();
 });
