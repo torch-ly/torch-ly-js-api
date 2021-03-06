@@ -51,7 +51,6 @@ export async function initializeTorchly(config: { backendUrl: string; authID: st
     initializeBackendCommunication();
     startSubscriptions();
 
-    console.log(12)
     await updateData();
 }
 

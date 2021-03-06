@@ -24,7 +24,6 @@ export function dataChanged(characterID: string) {
         .filter((sub) => sub.id === characterID)
         .forEach((sub) => sub.callback(character));
 
-    console.log(990, torchly.characters.array.map(c => c.subscriptionCallbacks), character?.subscriptionCallbacks)
     character?.subscriptionCallbacks.forEach((func) => func(character));
 }
 

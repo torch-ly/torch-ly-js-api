@@ -7,7 +7,6 @@ import {updateData as updateInitiativeData} from "../initiative";
 
 export async function updateData() {
     try {
-        console.log(3)
         const {data: {allCharacters, me, allPlayers, getInitiative: {order}}} = await apolloClient.query({
             query: gql`
                 {
@@ -20,7 +19,6 @@ export async function updateData() {
         });
 
         allCharacters.forEach((char: any) => char._id = char.id);
-        console.log(34)
         updateCharacterData(allCharacters);
         updateSelf(me);
         updatePlayerData(allPlayers);

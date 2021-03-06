@@ -57,7 +57,7 @@ describe('', () => {
             torchly.characters.array[0].unsubscribe(callback);
 
             torchly.characters.array[1].subscribe((character: Character) => res2_1 = (character.name === "Changed 1"));
-            torchly.characters.array[1].subscribe((character: Character) => res2_1 = (character.name === "Changed 1"));
+            torchly.characters.array[1].subscribe((character: Character) => res2_2 = (character.name === "Changed 1"));
 
             torchly.characters.array[2].subscribe(callback);
             torchly.characters.array[2].unsubscribe(callback);
@@ -67,8 +67,6 @@ describe('', () => {
             }
 
             setTimeout(() => {
-                console.log(res1, res2_1, res2_2, res3)
-                console.log(torchly.characters.array.map(b => b.name))
                 assert(res1 && res2_1 && res2_2 && res3);
                 res(null);
             }, 100);
