@@ -8,7 +8,7 @@
     "auto-test": "mocha --no-parallel -r ts-node/register -r dotenv/config tests/test.ts",
     "start-test-backend": "docker-compose down && docker-compose up -d",
     "stop-test-backend": "docker-compose down",
-    "test": "tsc && npm run start-test-backend && npm run test && npm run stop-test-backend"
+    "test": "tsc && npm run start-test-backend && npm run auto-test && npm run stop-test-backend"
   },
   "repository": {
     "type": "git",
