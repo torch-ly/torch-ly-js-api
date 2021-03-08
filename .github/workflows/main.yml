@@ -35,7 +35,7 @@ jobs:
       - name: Installing dependencies
         run: npm install
       - name: Running tests
-        run: npm test
+        run: npm run auto-test
         env: 
           BACKEND: ws://localhost:5000/graphql
-          AUTH_ID: gm
+          GM:
