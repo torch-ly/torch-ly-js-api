@@ -1,4 +1,4 @@
-import {defaultConfig, initializeTorchly, torchly} from "../index";
+import {defaultConfig, initializeTorchly, torchly} from "../src/index";
 
 before(function (done) {
     initializeTorchly(defaultConfig).then(() => {

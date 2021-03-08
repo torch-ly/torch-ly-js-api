@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "run": "tsc && node -r dotenv/config try.js",
+    "run": "tsc && node -r dotenv/config src/try.js",
     "auto-test": "mocha --no-parallel -r ts-node/register -r dotenv/config tests/test.ts",
     "start-test-backend": "docker-compose down && docker-compose up -d",
     "stop-test-backend": "docker-compose down",
@@ -36,6 +36,7 @@
     "ws": "^7.4.2"
   },
   "devDependencies": {
+    "@tsconfig/node12": "^1.0.7",
     "@types/chai": "^4.2.14",
     "@types/mocha": "^8.2.0",
     "chai": "^4.2.0",
