@@ -1,6 +1,6 @@
-import {torchly} from "../index";
-import {addPlayer} from "../backendComunication/entities/player";
-import {Player} from "../dataTypes/Player";
+import {torchly} from "../src/index";
+import {addPlayer} from "../src/backendComunication/entities/player";
+import {Player} from "../src/dataTypes/Player";
 
 const assert = require('assert');
 

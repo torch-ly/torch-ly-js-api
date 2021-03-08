@@ -1,8 +1,8 @@
-import {torchly} from "../../index";
-import {addCharacter} from "../../backendComunication/entities/characters/characters";
-import {Character} from "../../dataTypes/Character";
-import {addPlayer} from "../../backendComunication/entities/player";
-import {Player} from "../../dataTypes/Player";
+import {torchly} from "../../src/index";
+import {addCharacter} from "../../src/backendComunication/entities/characters/characters";
+import {Character} from "../../src/dataTypes/Character";
+import {addPlayer} from "../../src/backendComunication/entities/player";
+import {Player} from "../../src/dataTypes/Player";
 
 const assert = require('assert');
 
