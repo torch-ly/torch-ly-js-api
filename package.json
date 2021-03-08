@@ -10,6 +10,9 @@
     "stop-test-backend": "docker-compose down",
     "test": "tsc && npm run start-test-backend && npm run auto-test && npm run stop-test-backend"
   },
+  "files": [
+    "dist/"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/torch-ly/torch-ly-js-api.git"
