@@ -47,6 +47,8 @@ export const torchly = {
         vue: true,
     },
 
+    version: require("../package.json").version,
+
     closeConnections
 
 };
