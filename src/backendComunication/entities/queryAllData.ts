@@ -8,6 +8,7 @@ import {updateData as updateDrawingData} from "../drawing";
 import {updateData as updateBackgroundLayerData} from "../backgroundLayer";
 import {updateData as updateFogOfWarData} from "../fogOfWar";
 import {updateData as updateMapData} from "../maps";
+import {updateData as updateViewport} from "../viewport";
 
 export async function updateData() {
     try {
@@ -20,7 +21,9 @@ export async function updateData() {
                 getAllDrawingObjects,
                 getBackgroundLayer: {layer},
                 getFogOfWar: {polygons},
-                getMaps}} =
+                getMaps,
+                getViewport: {matrix}
+            }} =
         await apolloClient.query({
             query: gql`
                 {
@@ -32,6 +35,7 @@ export async function updateData() {
                     getBackgroundLayer {layer}
                     getFogOfWar {polygons}
                     getMaps {name selected}
+                    getViewport {matrix}
                 }
             `
         });
@@ -45,6 +49,7 @@ export async function updateData() {
         updateBackgroundLayerData(layer);
         updateFogOfWarData(polygons);
         updateMapData(getMaps);
+        updateViewport(matrix);
 
     } catch (e) {
         logError(e);

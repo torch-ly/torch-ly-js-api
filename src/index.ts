@@ -15,6 +15,7 @@ import {apiFunctions as measurementFunctions} from "./functions/measurements";
 import {apiFunctions as backgroundFunctions} from "./functions/background";
 import {apiFunctions as fogOfWarFunctions} from "./functions/fogOfWar";
 import {apiFunctions as mapsFunctions} from "./functions/maps";
+import {Viewport} from "./dataTypes/Viewport";
 
 export const torchly = {
 
@@ -67,6 +68,8 @@ export const torchly = {
         array: <{name: string, selected: boolean}[]>[],
         ...mapsFunctions
     },
+
+    viewport: new Viewport({scale: {x: 1, y: 1}, x: 0, y: 0}),
 
     config: {
         vue: true,

@@ -5,6 +5,7 @@ import {subscribeClearAllDrawings, subscribeRemoveDrawing, subscribeUpdateDrawin
 import {subscribePointTo} from "./measurements";
 import {subscribeBackgroundLayer} from "./backgroundLayer";
 import {subscribeFogOfWar} from "./fogOfWar";
+import {subscribeViewport} from "./viewport";
 
 export default function () {
     subscribeCharacter();
@@ -18,4 +19,5 @@ export default function () {
     subscribePointTo();
     subscribeBackgroundLayer();
     subscribeFogOfWar();
+    subscribeViewport();
 }
