@@ -32,7 +32,7 @@ export async function addDrawing(drawing: Drawing) {
                 }
             `,
             variables: {
-                order: drawing,
+                object: drawing,
             }
         });
     } catch (e) {
@@ -49,7 +49,7 @@ export async function removeDrawing(id: string) {
                 }
             `,
             variables: {
-                order: id,
+                id: id,
             }
         });
     } catch (e) {
@@ -81,7 +81,7 @@ export function subscribeUpdateDrawing() {
         `
     }).subscribe({
         next({data: {updateDrawing}}) {
-            addDrawingLocal(updateDrawing);
+            addDrawingLocal(updateDrawing.object);
         }
     });
 }
@@ -94,7 +94,7 @@ export function subscribeClearAllDrawings() {
             }
         `
     }).subscribe({
-        next({data: {updateDrawing}}) {
+        next() {
             torchly.drawing.array = [];
         }
     });
@@ -109,7 +109,7 @@ export function subscribeRemoveDrawing() {
         `
     }).subscribe({
         next({data: {removeDrawing}}) {
-            torchly.drawing.array = torchly.drawing.array.filter((draw) => draw.id !== removeDrawing);
+            torchly.drawing.array = torchly.drawing.array.filter((draw) => draw._id !== removeDrawing);
         }
     });
 }
@@ -119,7 +119,8 @@ export function updateData(drawing: any[]) {
 }
 
 function addDrawingLocal(drawing: any) {
-    torchly.drawing.array = torchly.drawing.array.filter((draw) => draw.id !== drawing.id);
+    console.log(9, drawing)
+    torchly.drawing.array = torchly.drawing.array.filter((draw) => draw._id !== drawing._id);
 
     if (drawing.type === "line") {
         torchly.drawing.array.push(new Line(drawing));

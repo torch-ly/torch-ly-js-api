@@ -4,8 +4,8 @@ export class Line extends Drawing {
 
     points: number[][];
 
-    constructor(drawing: {id: string, points: number[][]}) {
-        super(drawing.id, "line");
+    constructor(drawing: {_id: string, points: number[][]}) {
+        super(drawing._id, "line");
 
         this.points = drawing.points;
     }

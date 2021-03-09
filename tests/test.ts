@@ -11,6 +11,7 @@ describe("Tests", function () {
     importTest("Character Subscribtions", "./character/character-subscribtions.test.ts");
     importTest("Player", "./player.test.ts");
     importTest("Initiative", "./initiative.test.ts");
+    importTest("Drawing", "./drawing.test.ts");
 });
 
 function importTest(name: string, path: string) {
