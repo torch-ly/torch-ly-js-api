@@ -55,5 +55,5 @@ export function subscribeViewport() {
 }
 
 export function updateData(matrix: Viewport) {
-    torchly.viewport = new Viewport(matrix);
+    torchly.viewport.matrix = new Viewport(matrix);
 }

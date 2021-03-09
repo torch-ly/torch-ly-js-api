@@ -4,6 +4,7 @@ import {InitiativeValue} from "./dataTypes/InitiativeValue";
 import {Drawing} from "./dataTypes/Drawings/Drawing";
 import {Background} from "./dataTypes/Background/Background";
 import {FogOfWar} from "./dataTypes/FogOfWar/FogOfWar";
+import {Viewport} from "./dataTypes/Viewport";
 import initializeBackendCommunication, {closeConnections} from "./backendComunication/initialize";
 import startSubscriptions from "./backendComunication/startSubscriptions";
 import {updateData} from "./backendComunication/entities/queryAllData";
@@ -15,7 +16,7 @@ import {apiFunctions as measurementFunctions} from "./functions/measurements";
 import {apiFunctions as backgroundFunctions} from "./functions/background";
 import {apiFunctions as fogOfWarFunctions} from "./functions/fogOfWar";
 import {apiFunctions as mapsFunctions} from "./functions/maps";
-import {Viewport} from "./dataTypes/Viewport";
+import {apiFunctions as viewportFunctions} from "./functions/viewport";
 
 export const torchly = {
 
@@ -69,7 +70,10 @@ export const torchly = {
         ...mapsFunctions
     },
 
-    viewport: new Viewport({scale: {x: 1, y: 1}, x: 0, y: 0}),
+    viewport: {
+        matrix: new Viewport({scale: {x: 1, y: 1}, x: 0, y: 0}),
+        ...viewportFunctions
+    },
 
     config: {
         vue: true,
