@@ -5,10 +5,11 @@ import {updateData as updateCharacterData} from "./characters/characters";
 import {updateData as updatePlayerData, updateSelf} from "./player";
 import {updateData as updateInitiativeData} from "../initiative";
 import {updateData as updateDrawingData} from "../drawing";
+import {updateData as updateBackgroundLayerData} from "../backgroundLayer";
 
 export async function updateData() {
     try {
-        const {data: {allCharacters, me, allPlayers, getInitiative: {order}, getAllDrawingObjects}} = await apolloClient.query({
+        const {data: {allCharacters, me, allPlayers, getInitiative: {order}, getAllDrawingObjects, getBackgroundLayer: {layer}}} = await apolloClient.query({
             query: gql`
                 {
                     allCharacters{pos{point{x y} rot size} name token players {id name} id details conditions}
@@ -16,6 +17,7 @@ export async function updateData() {
                     allPlayers {id name gm}
                     getInitiative {order}
                     getAllDrawingObjects
+                    getBackgroundLayer {layer}
                 }
             `
         });
@@ -26,6 +28,7 @@ export async function updateData() {
         updatePlayerData(allPlayers);
         updateInitiativeData(order);
         updateDrawingData(getAllDrawingObjects);
+        updateBackgroundLayerData(layer);
     } catch (e) {
         logError(e);
     }

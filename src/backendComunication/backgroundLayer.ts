@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import logError from "../error";
 import {torchly} from "../index";
 import {Background} from "../dataTypes/Background/Background";
+import {Image} from "../dataTypes/Background/Image";
 
 export async function getBackgroundLayer() {
     try {
@@ -52,6 +53,12 @@ export function subscribeBackgroundLayer() {
     });
 }
 
-export function updateData(drawing: Background[]) {
-    torchly.background.array = drawing;
+export function updateData(drawings: any[]) {
+    for (let draw of drawings) {
+        if (draw.type === "image") {
+            torchly.background.array.push(new Image(draw));
+        } else {
+            console.error("Type ", draw.type, " is not a valid background layer type.");
+        }
+    }
 }
