@@ -21,7 +21,7 @@ function subscribeChanges(callback: Function) {
 }
 
 function unsubscribeChanges(callback: Function) {
-    subscriptionCallbacks = subscriptionCallbacks.filter((func: Function) => func === callback);
+    subscriptionCallbacks = subscriptionCallbacks.filter((func: Function) => func !== callback);
 }
 
 function sort() {

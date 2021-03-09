@@ -27,7 +27,7 @@ function subscribeChanges(id: string, callback: Function) {
 
 function unsubscribeChanges(id: string, callback: Function) {
     console.error("Player subscribtions are currently not available!");
-    subscriptionCallbacks = subscriptionCallbacks.filter(func => func.id === id && func.callback === callback);
+    subscriptionCallbacks = subscriptionCallbacks.filter(func => func.id === id && func.callback !== callback);
 }
 
 export function dataChanged(playerID: string) {
@@ -45,7 +45,7 @@ export const apiFunctions = {
     getCharactersByPlayerID,
     forceUpdatePlayers: getAllPlayers,
     getByID: getPlayerByID,
-    subscriptionCallbacks,
+    subscribeChanges,
     unsubscribeChanges,
     dataChanged,
     add: addPlayer,

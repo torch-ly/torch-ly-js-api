@@ -14,7 +14,7 @@ function subscribeChanges(id: string, callback: Function) {
 }
 
 function unsubscribeChanges(id: string, callback: Function) {
-    subscriptionCallbacks = subscriptionCallbacks.filter(func => func.id === id && func.callback === callback);
+    subscriptionCallbacks = subscriptionCallbacks.filter(func => func.id !== id && func.callback !== callback);
 }
 
 export function dataChanged(characterID: string) {
