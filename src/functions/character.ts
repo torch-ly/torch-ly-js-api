@@ -1,6 +1,7 @@
 import {torchly} from "../index";
 import {addCharacter, getCharacters, removeCharacter} from "../backendComunication/entities/characters/characters";
 import {Character} from "../dataTypes/Character";
+import {updateRelativeCharacterPosition} from "../backendComunication/entities/characters/characterAttributes";
 
 let subscriptionCallbacks = <{id: string, callback: Function}[]>[];
 
@@ -34,4 +35,5 @@ export const apiFunctions = {
     forceUpdateCharacters: getCharacters,
     subscribeChanges,
     unsubscribeChanges,
+    moveRelative: updateRelativeCharacterPosition
 }

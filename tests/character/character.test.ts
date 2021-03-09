@@ -27,8 +27,8 @@ describe('', () => {
                 token: "http://test.test.com",
                 pos: {
                     point: {
-                        x: 0,
-                        y: 0,
+                        x: 6,
+                        y: 6,
                     },
                     rot: 0,
                     size: 1,
@@ -45,6 +45,50 @@ describe('', () => {
 
             setTimeout(() => {
                 assert(torchly.characters.array.length === 1);
+                res(null);
+            }, 100);
+
+        })
+            .then(() => done())
+            .catch((err) => done(err));
+    });
+
+    it('start position (6,6)', (done) => {
+
+        try {
+            assert(torchly.characters.array[0].pos.point.x === 6
+                && torchly.characters.array[0].pos.point.y === 6);
+        } catch (e) {
+            done(e);
+        }
+        done();
+
+    });
+
+    it('change position', (done) => {
+        new Promise((res) => {
+
+            torchly.characters.array[0].setPosition({x: 2, y: 2});
+
+            setTimeout(() => {
+                assert(torchly.characters.array[0].pos.point.x === 2
+                    && torchly.characters.array[0].pos.point.y === 2);
+                res(null);
+            }, 100);
+
+        })
+            .then(() => done())
+            .catch((err) => done(err));
+    });
+
+    it('change position relative', (done) => {
+        new Promise((res) => {
+
+            torchly.characters.array[0].moveRelative({x: 2, y: -2});
+
+            setTimeout(() => {
+                assert(torchly.characters.array[0].pos.point.x === 4
+                    && torchly.characters.array[0].pos.point.y === 0);
                 res(null);
             }, 100);
 

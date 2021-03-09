@@ -40,6 +40,25 @@ export async function setCharacterPosition(characterID: string, point: {x: numbe
     }
 }
 
+export async function updateRelativeCharacterPosition(characterID: string, point: {x: number, y: number}) {
+    try {
+        await apolloClient.mutate({
+            mutation: gql`
+                mutation updateRelativeCharacterPosition($id:String!, $x:Int!, $y:Int!){
+                    updateRelativeCharacterPosition(id:$id, x:$x, y:$y) {pos{point{x y} rot size} name token players {id} id}
+                }
+            `,
+            variables: {
+                id: characterID,
+                x: point.x,
+                y: point.y
+            }
+        });
+    } catch (e) {
+        logError(e);
+    }
+}
+
 export async function setCharacterPlayers(characterID: string, players: string[]) {
     try {
         await apolloClient.mutate({

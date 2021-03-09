@@ -5,7 +5,7 @@ import {
     setCharacterDetails,
     setCharacterName,
     setCharacterPlayers,
-    setCharacterPosition
+    setCharacterPosition, updateRelativeCharacterPosition
 } from "../backendComunication/entities/characters/characterAttributes";
 import {Player} from "./Player";
 import {Subscribable} from "./Subscribable";
@@ -44,6 +44,12 @@ export class Character extends Subscribable {
 
     setPosition(point: { x: number, y: number }) {
         setCharacterPosition(this._id, point);
+
+        return this;
+    };
+
+    moveRelative(point: { x: number, y: number }) {
+        updateRelativeCharacterPosition(this._id, point);
 
         return this;
     };
