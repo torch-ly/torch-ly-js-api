@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 import logError from "../error";
 import {torchly} from "../index";
 import {FogOfWar} from "../dataTypes/FogOfWar/FogOfWar";
-import {Polygons} from "../dataTypes/FogOfWar/Polygons";
+import {Polygon} from "../dataTypes/FogOfWar/Polygon";
 
 export async function getFogOfWar() {
     try {
@@ -92,7 +92,7 @@ export function updateData(shapes: any[]) {
 
     for (let shape of shapes) {
         if (shape.type === "polygon") {
-            torchly.fogOfWar.array.push(new Polygons(shape));
+            torchly.fogOfWar.array.push(new Polygon(shape));
         } else {
             console.error("Type ", shape.type, " is not a valid fog of war shape type.");
         }

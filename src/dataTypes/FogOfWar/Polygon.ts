@@ -1,6 +1,6 @@
 import {FogOfWar} from "./FogOfWar";
 
-export class Polygons extends FogOfWar{
+export class Polygon extends FogOfWar {
 
     points: {x: number, y: number}[];
 

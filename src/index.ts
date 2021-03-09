@@ -3,6 +3,7 @@ import {Character} from "./dataTypes/Character";
 import {InitiativeValue} from "./dataTypes/InitiativeValue";
 import {Drawing} from "./dataTypes/Drawings/Drawing";
 import {Background} from "./dataTypes/Background/Background";
+import {FogOfWar} from "./dataTypes/FogOfWar/FogOfWar";
 import initializeBackendCommunication, {closeConnections} from "./backendComunication/initialize";
 import startSubscriptions from "./backendComunication/startSubscriptions";
 import {updateData} from "./backendComunication/entities/queryAllData";
@@ -12,7 +13,7 @@ import {apiFunctions as initiativeFunctions} from "./functions/initiative";
 import {apiFunctions as drawingFunctions} from "./functions/drawing";
 import {apiFunctions as measurementFunctions} from "./functions/measurements";
 import {apiFunctions as backgroundFunctions} from "./functions/background";
-import {FogOfWar} from "./dataTypes/FogOfWar/FogOfWar";
+import {apiFunctions as fogOfWarFunctions} from "./functions/fogOfWar";
 
 export const torchly = {
 
@@ -58,6 +59,7 @@ export const torchly = {
 
     fogOfWar: {
         array: <FogOfWar[]>[],
+        ...fogOfWarFunctions
     },
 
     config: {
