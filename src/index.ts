@@ -10,6 +10,7 @@ import {apiFunctions as playerFunctions} from "./functions/players";
 import {apiFunctions as initiativeFunctions} from "./functions/initiative";
 import {apiFunctions as drawingFunctions} from "./functions/drawing";
 import {apiFunctions as measurementFunctions} from "./functions/measurements";
+import {Background} from "./dataTypes/Background/Background";
 
 export const torchly = {
 
@@ -46,6 +47,10 @@ export const torchly = {
 
     measurement : {
         ...measurementFunctions,
+    },
+
+    background: {
+        array: <Background[]>[],
     },
 
     config: {
