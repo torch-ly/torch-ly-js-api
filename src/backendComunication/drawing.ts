@@ -119,7 +119,6 @@ export function updateData(drawing: any[]) {
 }
 
 function addDrawingLocal(drawing: any) {
-    console.log(9, drawing)
     torchly.drawing.array = torchly.drawing.array.filter((draw) => draw._id !== drawing._id);
 
     if (drawing.type === "line") {

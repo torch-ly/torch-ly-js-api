@@ -26,7 +26,6 @@ describe('', () => {
             }));
 
             setTimeout(() => {
-                console.log(torchly.drawing.array)
                 assert(torchly.drawing.array.length === 1
                     && torchly.drawing.array[0].type === 'line'
                     && (<Line>torchly.drawing.array[0]).points[0][0] === 0);

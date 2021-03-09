@@ -2,8 +2,6 @@ import {defaultConfig, initializeTorchly} from "./index";
 
 initializeTorchly(defaultConfig);
 
-console.log(12)
-
 //addPlayer("test character 123")
 
 //console.log(torchly.characters.array.length)
