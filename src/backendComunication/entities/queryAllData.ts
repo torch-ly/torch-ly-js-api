@@ -6,10 +6,20 @@ import {updateData as updatePlayerData, updateSelf} from "./player";
 import {updateData as updateInitiativeData} from "../initiative";
 import {updateData as updateDrawingData} from "../drawing";
 import {updateData as updateBackgroundLayerData} from "../backgroundLayer";
+import {updateData as updateFogOfWarData} from "../fogOfWar";
 
 export async function updateData() {
     try {
-        const {data: {allCharacters, me, allPlayers, getInitiative: {order}, getAllDrawingObjects, getBackgroundLayer: {layer}}} = await apolloClient.query({
+        const {
+            data: {
+                allCharacters,
+                me,
+                allPlayers,
+                getInitiative: {order},
+                getAllDrawingObjects,
+                getBackgroundLayer: {layer},
+                getFogOfWar: {polygons}}} =
+        await apolloClient.query({
             query: gql`
                 {
                     allCharacters{pos{point{x y} rot size} name token players {id name} id details conditions}
@@ -18,6 +28,7 @@ export async function updateData() {
                     getInitiative {order}
                     getAllDrawingObjects
                     getBackgroundLayer {layer}
+                    getFogOfWar {polygons}
                 }
             `
         });
@@ -29,6 +40,7 @@ export async function updateData() {
         updateInitiativeData(order);
         updateDrawingData(getAllDrawingObjects);
         updateBackgroundLayerData(layer);
+        updateFogOfWarData(polygons);
     } catch (e) {
         logError(e);
     }

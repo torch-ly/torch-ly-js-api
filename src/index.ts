@@ -12,6 +12,7 @@ import {apiFunctions as initiativeFunctions} from "./functions/initiative";
 import {apiFunctions as drawingFunctions} from "./functions/drawing";
 import {apiFunctions as measurementFunctions} from "./functions/measurements";
 import {apiFunctions as backgroundFunctions} from "./functions/background";
+import {FogOfWar} from "./dataTypes/FogOfWar/FogOfWar";
 
 export const torchly = {
 
@@ -53,6 +54,10 @@ export const torchly = {
     background: {
         array: <Background[]>[],
         ...backgroundFunctions
+    },
+
+    fogOfWar: {
+        array: <FogOfWar[]>[],
     },
 
     config: {

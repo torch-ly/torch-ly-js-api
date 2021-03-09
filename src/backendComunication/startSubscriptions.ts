@@ -4,6 +4,7 @@ import {subscribePlayer, subscribeRemovePlayer} from "./entities/player";
 import {subscribeClearAllDrawings, subscribeRemoveDrawing, subscribeUpdateDrawing} from "./drawing";
 import {subscribePointTo} from "./measurements";
 import {subscribeBackgroundLayer} from "./backgroundLayer";
+import {subscribeFogOfWar} from "./fogOfWar";
 
 export default function () {
     subscribeCharacter();
@@ -16,4 +17,5 @@ export default function () {
     subscribeClearAllDrawings();
     subscribePointTo();
     subscribeBackgroundLayer();
+    subscribeFogOfWar();
 }
