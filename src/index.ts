@@ -7,6 +7,8 @@ import {updateData} from "./backendComunication/entities/queryAllData";
 import {apiFunctions as characterFunctions} from "./functions/character";
 import {apiFunctions as playerFunctions} from "./functions/players";
 import {apiFunctions as initiativeFunctions} from "./functions/initiative";
+import {Drawing} from "./dataTypes/Drawings/Drawing";
+import {apiFunctions as drawingFunctions} from "./functions/drawing";
 
 export const torchly = {
 
@@ -34,6 +36,11 @@ export const torchly = {
     initiative: {
         array: <InitiativeValue[]>[],
         ...initiativeFunctions,
+    },
+
+    drawing: {
+        array: <Drawing[]>[],
+        ...drawingFunctions
     },
 
     config: {
