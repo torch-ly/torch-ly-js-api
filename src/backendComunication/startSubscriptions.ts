@@ -3,6 +3,7 @@ import {subscribeInitiative} from "./initiative";
 import {subscribePlayer, subscribeRemovePlayer} from "./entities/player";
 import {subscribeClearAllDrawings, subscribeRemoveDrawing, subscribeUpdateDrawing} from "./drawing";
 import {subscribePointTo} from "./measurements";
+import {subscribeBackgroundLayer} from "./backgroundLayer";
 
 export default function () {
     subscribeCharacter();
@@ -14,4 +15,5 @@ export default function () {
     subscribeRemoveDrawing();
     subscribeClearAllDrawings();
     subscribePointTo();
+    subscribeBackgroundLayer();
 }
