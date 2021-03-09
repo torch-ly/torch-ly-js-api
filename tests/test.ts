@@ -18,6 +18,7 @@ describe("Tests", function () {
     importTest("Point to field", "./pointTo.test.ts");
     importTest("Background", "./background-layer.test.ts");
     importTest("Fog of War", "./fogOfWar.test.ts");
+    importTest("Maps", "./maps.test.ts");
 });
 
 function importTest(name: string, path: string) {
