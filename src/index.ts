@@ -14,6 +14,7 @@ import {apiFunctions as drawingFunctions} from "./functions/drawing";
 import {apiFunctions as measurementFunctions} from "./functions/measurements";
 import {apiFunctions as backgroundFunctions} from "./functions/background";
 import {apiFunctions as fogOfWarFunctions} from "./functions/fogOfWar";
+import {apiFunctions as mapsFunctions} from "./functions/maps";
 
 export const torchly = {
 
@@ -60,6 +61,11 @@ export const torchly = {
     fogOfWar: {
         array: <FogOfWar[]>[],
         ...fogOfWarFunctions
+    },
+
+    maps: {
+        array: <{name: string, selected: boolean}[]>[],
+        ...mapsFunctions
     },
 
     config: {

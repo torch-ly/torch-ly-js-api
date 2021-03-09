@@ -7,6 +7,7 @@ import {updateData as updateInitiativeData} from "../initiative";
 import {updateData as updateDrawingData} from "../drawing";
 import {updateData as updateBackgroundLayerData} from "../backgroundLayer";
 import {updateData as updateFogOfWarData} from "../fogOfWar";
+import {updateData as updateMapData} from "../maps";
 
 export async function updateData() {
     try {
@@ -18,7 +19,8 @@ export async function updateData() {
                 getInitiative: {order},
                 getAllDrawingObjects,
                 getBackgroundLayer: {layer},
-                getFogOfWar: {polygons}}} =
+                getFogOfWar: {polygons},
+                getMaps}} =
         await apolloClient.query({
             query: gql`
                 {
@@ -29,6 +31,7 @@ export async function updateData() {
                     getAllDrawingObjects
                     getBackgroundLayer {layer}
                     getFogOfWar {polygons}
+                    getMaps {name selected}
                 }
             `
         });
@@ -41,6 +44,8 @@ export async function updateData() {
         updateDrawingData(getAllDrawingObjects);
         updateBackgroundLayerData(layer);
         updateFogOfWarData(polygons);
+        updateMapData(getMaps);
+
     } catch (e) {
         logError(e);
     }
