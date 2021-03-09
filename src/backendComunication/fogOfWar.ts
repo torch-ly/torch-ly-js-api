@@ -39,6 +39,40 @@ export async function setFogOfWar(shapes: FogOfWar[]) {
     }
 }
 
+export async function addFogOfWarObject(shape: FogOfWar) {
+    try {
+        await apolloClient.mutate({
+            mutation: gql`
+                mutation addFogOfWarObject($json:JSON!){
+                    addFogOfWarObject(json:$json) {polygons}
+                }
+            `,
+            variables: {
+                json: shape,
+            }
+        });
+    } catch (e) {
+        logError(e);
+    }
+}
+
+export async function removeFogOfWarObject(id: string) {
+    try {
+        await apolloClient.mutate({
+            mutation: gql`
+                mutation removeFogOfWarObject($id:String!){
+                    removeFogOfWarObject(id:$id) {polygons}
+                }
+            `,
+            variables: {
+                id: id,
+            }
+        });
+    } catch (e) {
+        logError(e);
+    }
+}
+
 export function subscribeFogOfWar() {
     apolloClient.subscribe({
         query: gql`
