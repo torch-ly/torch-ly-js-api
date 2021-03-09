@@ -2,6 +2,7 @@ import {Player} from "./dataTypes/Player"
 import {Character} from "./dataTypes/Character";
 import {InitiativeValue} from "./dataTypes/InitiativeValue";
 import {Drawing} from "./dataTypes/Drawings/Drawing";
+import {Background} from "./dataTypes/Background/Background";
 import initializeBackendCommunication, {closeConnections} from "./backendComunication/initialize";
 import startSubscriptions from "./backendComunication/startSubscriptions";
 import {updateData} from "./backendComunication/entities/queryAllData";
@@ -10,7 +11,7 @@ import {apiFunctions as playerFunctions} from "./functions/players";
 import {apiFunctions as initiativeFunctions} from "./functions/initiative";
 import {apiFunctions as drawingFunctions} from "./functions/drawing";
 import {apiFunctions as measurementFunctions} from "./functions/measurements";
-import {Background} from "./dataTypes/Background/Background";
+import {apiFunctions as backgroundFunctions} from "./functions/background";
 
 export const torchly = {
 
@@ -51,6 +52,7 @@ export const torchly = {
 
     background: {
         array: <Background[]>[],
+        ...backgroundFunctions
     },
 
     config: {

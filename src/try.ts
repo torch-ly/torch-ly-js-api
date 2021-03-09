@@ -1,6 +1,18 @@
-import {defaultConfig, initializeTorchly} from "./index";
+import {defaultConfig, initializeTorchly, torchly} from "./index";
+import {Image} from "./dataTypes/Background/Image";
 
 initializeTorchly(defaultConfig);
+
+setTimeout(() => {
+    torchly.background.add(new Image({
+        _id: "",
+        url: "https://test.test.org",
+        point: {x: 1, y: 2},
+        rot: 0.5,
+        height: 10,
+        width: 10,
+    }))
+},1000);
 
 //addPlayer("test character 123")
 

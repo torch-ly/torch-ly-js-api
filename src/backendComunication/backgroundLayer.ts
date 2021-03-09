@@ -22,7 +22,7 @@ export async function getBackgroundLayer() {
     }
 }
 
-export async function updateBackgroundLayer(layer: Background[]) {
+export async function setBackgroundLayer(layer: Background[]) {
     try {
         await apolloClient.mutate({
             mutation: gql`
@@ -32,6 +32,40 @@ export async function updateBackgroundLayer(layer: Background[]) {
             `,
             variables: {
                 layer: layer,
+            }
+        });
+    } catch (e) {
+        logError(e);
+    }
+}
+
+export async function addBackgroundLayerObject(object: Background) {
+    try {
+        await apolloClient.mutate({
+            mutation: gql`
+                mutation addBackgroundLayerObject($object:JSON!){
+                    addBackgroundLayerObject(object:$object) {layer}
+                }
+            `,
+            variables: {
+                object: object,
+            }
+        });
+    } catch (e) {
+        logError(e);
+    }
+}
+
+export async function removeBackgroundLayerObject(id: string) {
+    try {
+        await apolloClient.mutate({
+            mutation: gql`
+                mutation removeBackgroundLayerObject($id:String!){
+                    removeBackgroundLayerObject(id:$id) {layer}
+                }
+            `,
+            variables: {
+                id: id,
             }
         });
     } catch (e) {
@@ -53,12 +87,14 @@ export function subscribeBackgroundLayer() {
     });
 }
 
-export function updateData(drawings: any[]) {
-    for (let draw of drawings) {
-        if (draw.type === "image") {
-            torchly.background.array.push(new Image(draw));
+export function updateData(layer: any[]) {
+    torchly.background.array = [];
+
+    for (let object of layer) {
+        if (object.type === "image") {
+            torchly.background.array.push(new Image(object));
         } else {
-            console.error("Type ", draw.type, " is not a valid background layer type.");
+            console.error("Type ", object.type, " is not a valid background layer type.");
         }
     }
 }

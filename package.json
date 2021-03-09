@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "run": "tsc && node -r dotenv/config src/try.js",
+    "run": "tsc && node -r dotenv/config dist/src/try.js",
     "auto-test": "mocha --no-parallel -r ts-node/register -r dotenv/config tests/test.ts",
     "start-test-backend": "docker-compose down && docker-compose up -d",
     "stop-test-backend": "docker-compose down",

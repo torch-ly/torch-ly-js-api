@@ -16,6 +16,7 @@ describe("Tests", function () {
     importTest("Initiative", "./initiative.test.ts");
     importTest("Drawing", "./drawing.test.ts");
     importTest("Point to field", "./pointTo.test.ts");
+    importTest("Background", "./background-layer.test.ts");
 });
 
 function importTest(name: string, path: string) {
