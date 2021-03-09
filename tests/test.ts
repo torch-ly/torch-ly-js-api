@@ -15,6 +15,7 @@ describe("Tests", function () {
     importTest("Player", "./player.test.ts");
     importTest("Initiative", "./initiative.test.ts");
     importTest("Drawing", "./drawing.test.ts");
+    importTest("Point to field", "./pointTo.test.ts");
 });
 
 function importTest(name: string, path: string) {

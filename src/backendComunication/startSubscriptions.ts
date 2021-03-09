@@ -2,6 +2,7 @@ import {subscribeCharacter, subscribeRemoveCharacter} from "./entities/character
 import {subscribeInitiative} from "./initiative";
 import {subscribePlayer, subscribeRemovePlayer} from "./entities/player";
 import {subscribeClearAllDrawings, subscribeRemoveDrawing, subscribeUpdateDrawing} from "./drawing";
+import {subscribePointTo} from "./measurements";
 
 export default function () {
     subscribeCharacter();
@@ -12,4 +13,5 @@ export default function () {
     subscribeUpdateDrawing();
     subscribeRemoveDrawing();
     subscribeClearAllDrawings();
+    subscribePointTo();
 }

@@ -1,14 +1,15 @@
 import {Player} from "./dataTypes/Player"
 import {Character} from "./dataTypes/Character";
 import {InitiativeValue} from "./dataTypes/InitiativeValue";
+import {Drawing} from "./dataTypes/Drawings/Drawing";
 import initializeBackendCommunication, {closeConnections} from "./backendComunication/initialize";
 import startSubscriptions from "./backendComunication/startSubscriptions";
 import {updateData} from "./backendComunication/entities/queryAllData";
 import {apiFunctions as characterFunctions} from "./functions/character";
 import {apiFunctions as playerFunctions} from "./functions/players";
 import {apiFunctions as initiativeFunctions} from "./functions/initiative";
-import {Drawing} from "./dataTypes/Drawings/Drawing";
 import {apiFunctions as drawingFunctions} from "./functions/drawing";
+import {apiFunctions as measurementFunctions} from "./functions/measurements";
 
 export const torchly = {
 
@@ -41,6 +42,10 @@ export const torchly = {
     drawing: {
         array: <Drawing[]>[],
         ...drawingFunctions
+    },
+
+    measurement : {
+        ...measurementFunctions,
     },
 
     config: {
