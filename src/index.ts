@@ -84,8 +84,10 @@ export const torchly = {
     },
 
     config: {
-        vue: true,
+        vue: true
     },
+
+    errors: <Object[]>[],
 
     version: require("../package.json").version,
 
