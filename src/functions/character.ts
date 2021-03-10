@@ -7,15 +7,19 @@ function getCharacterByID(id: string): Character | undefined {
     return torchly.characters.array.find((char) => char._id === id);
 }
 
-function subscribeChanges(id: string, callback: Function) {
-    getCharacterByID(id)?.subscribe(callback);
+let subscribtions = <Function[]>[];
+
+function subscribeChanges(callback: Function) {
+    subscribtions.push(callback);
 }
 
-function unsubscribeChanges(id: string, callback: Function) {
-    getCharacterByID(id)?.unsubscribe(callback);
+function unsubscribeChanges(callback: Function) {
+    subscribtions = subscribtions.filter(func => func !== callback);
 }
 
 export function dataChanged(characterID: string) {
+
+    subscribtions.forEach((func => func()));
 
     let character = getCharacterByID(characterID);
 
