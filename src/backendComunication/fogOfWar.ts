@@ -22,7 +22,7 @@ export async function getFogOfWar() {
     }
 }
 
-export async function setFogOfWar(shapes: FogOfWar[]) {
+export async function setFogOfWar(json: FogOfWar[]) {
     try {
         await apolloClient.mutate({
             mutation: gql`
@@ -31,7 +31,7 @@ export async function setFogOfWar(shapes: FogOfWar[]) {
                 }
             `,
             variables: {
-                json: shapes,
+                json,
             }
         });
     } catch (e) {
@@ -39,7 +39,7 @@ export async function setFogOfWar(shapes: FogOfWar[]) {
     }
 }
 
-export async function addFogOfWarObject(shape: FogOfWar) {
+export async function addFogOfWarObject(json: FogOfWar) {
     try {
         await apolloClient.mutate({
             mutation: gql`
@@ -48,7 +48,7 @@ export async function addFogOfWarObject(shape: FogOfWar) {
                 }
             `,
             variables: {
-                json: shape,
+                json,
             }
         });
     } catch (e) {
@@ -65,7 +65,7 @@ export async function removeFogOfWarObject(id: string) {
                 }
             `,
             variables: {
-                id: id,
+                id,
             }
         });
     } catch (e) {

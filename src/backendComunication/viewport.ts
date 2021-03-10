@@ -31,7 +31,7 @@ export async function updateViewport(matrix: Viewport) {
                 }
             `,
             variables: {
-                matrix: matrix,
+                matrix,
             }
         });
     } catch (e) {

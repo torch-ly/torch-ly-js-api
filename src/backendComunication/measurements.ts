@@ -12,7 +12,7 @@ export async function pointTo(pointer: {point: {x: number, y: number}, color: st
                 }
             `,
             variables: {
-                pointer: pointer,
+                pointer,
             }
         });
     } catch (e) {

@@ -54,7 +54,6 @@ export async function updateData() {
         updateMapData(getMaps);
         updateViewport(matrix);
         torchly.lexicon.monster.array = getMonsters;
-        console.log(1, getMonsters);
 
     } catch (e) {
         logError(e);

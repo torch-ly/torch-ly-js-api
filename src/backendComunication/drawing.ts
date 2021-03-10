@@ -23,7 +23,7 @@ export async function getAllDrawingObjects() {
     }
 }
 
-export async function addDrawing(drawing: Drawing) {
+export async function addDrawing(object: Drawing) {
     try {
         await apolloClient.mutate({
             mutation: gql`
@@ -32,7 +32,7 @@ export async function addDrawing(drawing: Drawing) {
                 }
             `,
             variables: {
-                object: drawing,
+                object,
             }
         });
     } catch (e) {
@@ -49,7 +49,7 @@ export async function removeDrawing(id: string) {
                 }
             `,
             variables: {
-                id: id,
+                id,
             }
         });
     } catch (e) {

@@ -2,8 +2,6 @@ import {apolloClient} from "./initialize";
 import gql from "graphql-tag";
 import logError from "../error";
 import {torchly} from "../index";
-import {FogOfWar} from "../dataTypes/FogOfWar/FogOfWar";
-import {Polygon} from "../dataTypes/FogOfWar/Polygon";
 
 export async function getMaps() {
     try {
@@ -31,7 +29,7 @@ export async function loadMap(name: string) {
                 }
             `,
             variables: {
-                name: name,
+                name,
             }
         });
     } catch (e) {
@@ -48,7 +46,7 @@ export async function createMap(name: string) {
                 }
             `,
             variables: {
-                name: name,
+                name,
             }
         });
     } catch (e) {
@@ -65,7 +63,7 @@ export async function deleteMap(name: string) {
                 }
             `,
             variables: {
-                name: name,
+                name,
             }
         });
     } catch (e) {

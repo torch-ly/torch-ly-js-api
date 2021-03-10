@@ -31,7 +31,7 @@ export async function setBackgroundLayer(layer: Background[]) {
                 }
             `,
             variables: {
-                layer: layer,
+                layer,
             }
         });
     } catch (e) {
@@ -48,7 +48,7 @@ export async function addBackgroundLayerObject(object: Background) {
                 }
             `,
             variables: {
-                object: object,
+                object,
             }
         });
     } catch (e) {
@@ -65,7 +65,7 @@ export async function removeBackgroundLayerObject(id: string) {
                 }
             `,
             variables: {
-                id: id,
+                id,
             }
         });
     } catch (e) {
