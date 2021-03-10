@@ -10,9 +10,11 @@ before(function (done) {
 });
 
 describe("Tests", function () {
+
     importTest("Character", "./character/character.test.ts");
     importTest("Character Subscribtions", "./character/character-subscribtions.test.ts");
-    importTest("Player", "./player.test.ts");
+    importTest("Player", "./player/player.test.ts");
+    importTest("Player Subscribtions", "./player/player-subscribtions.test.ts");
     importTest("Initiative", "./initiative.test.ts");
     importTest("Drawing", "./drawing.test.ts");
     importTest("Point to field", "./pointTo.test.ts");

@@ -3,9 +3,8 @@ import {Player} from "../../dataTypes/Player";
 import {apolloClient} from "../initialize";
 import gql from "graphql-tag";
 import logError from "../../error";
-import {createCharacter, createPlayer} from "../../objectFactory";
-import {dataChanged} from "../../functions/players";
-import {dataChanged as callSubscribtionCallbacks} from "../../functions/character";
+import {createPlayer} from "../../objectFactory";
+import {dataChanged as callSubscribtionCallbacks} from "../../functions/players";
 
 export async function getAllPlayers() {
     try {

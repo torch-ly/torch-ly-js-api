@@ -44,5 +44,5 @@ export const apiFunctions = {
     subscribeChanges,
     unsubscribeChanges,
     dataChanged,
-    add: addPlayer,
+    add: (player: Player) => addPlayer(player)
 }
