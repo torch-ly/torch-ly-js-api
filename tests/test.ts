@@ -20,6 +20,7 @@ describe("Tests", function () {
     importTest("Fog of War", "./fogOfWar.test.ts");
     importTest("Maps", "./maps.test.ts");
     importTest("Viewport", "./viewport.test.ts");
+    // importTest("Monster", "./lexicon/monster.test.ts"); // currently untestable
 });
 
 function importTest(name: string, path: string) {

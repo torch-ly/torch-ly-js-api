@@ -9,6 +9,7 @@ import {updateData as updateBackgroundLayerData} from "../backgroundLayer";
 import {updateData as updateFogOfWarData} from "../fogOfWar";
 import {updateData as updateMapData} from "../maps";
 import {updateData as updateViewport} from "../viewport";
+import {torchly} from "../../index";
 
 export async function updateData() {
     try {
@@ -22,7 +23,8 @@ export async function updateData() {
                 getBackgroundLayer: {layer},
                 getFogOfWar: {polygons},
                 getMaps,
-                getViewport: {matrix}
+                getViewport: {matrix},
+                getMonsters
             }} =
         await apolloClient.query({
             query: gql`
@@ -36,6 +38,7 @@ export async function updateData() {
                     getFogOfWar {polygons}
                     getMaps {name selected}
                     getViewport {matrix}
+                    getMonsters
                 }
             `
         });
@@ -50,6 +53,8 @@ export async function updateData() {
         updateFogOfWarData(polygons);
         updateMapData(getMaps);
         updateViewport(matrix);
+        torchly.lexicon.monster.array = getMonsters;
+        console.log(1, getMonsters);
 
     } catch (e) {
         logError(e);

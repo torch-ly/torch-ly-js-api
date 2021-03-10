@@ -17,6 +17,7 @@ import {apiFunctions as backgroundFunctions} from "./functions/background";
 import {apiFunctions as fogOfWarFunctions} from "./functions/fogOfWar";
 import {apiFunctions as mapsFunctions} from "./functions/maps";
 import {apiFunctions as viewportFunctions} from "./functions/viewport";
+import {apiFunctions as monsterFunctions} from "./functions/lexicon/monster";
 
 export const torchly = {
 
@@ -73,6 +74,13 @@ export const torchly = {
     viewport: {
         matrix: new Viewport({scale: {x: 1, y: 1}, x: 0, y: 0}),
         ...viewportFunctions
+    },
+
+    lexicon: {
+        monster: {
+            array: <Object[]>[],
+            ...monsterFunctions
+        },
     },
 
     config: {
