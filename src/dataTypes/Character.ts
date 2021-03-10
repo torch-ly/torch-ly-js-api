@@ -42,6 +42,18 @@ export class Character extends Subscribable {
         return this;
     };
 
+    setRotation(rot: number) {
+        setCharacterAttrs(this._id, rot, this.pos.size);
+
+        return this;
+    };
+
+    setSize(size: number) {
+        setCharacterAttrs(this._id, this.pos.rot, size);
+
+        return this;
+    };
+
     setPosition(point: { x: number, y: number }) {
         setCharacterPosition(this._id, point);
 
@@ -72,6 +84,27 @@ export class Character extends Subscribable {
 
         return this;
     }
+
+    setHP(hp: number) {
+        setCharacterDetails(this._id, {
+            ...this.details,
+            hp
+        });
+    };
+
+    setAC(ac: number) {
+        setCharacterDetails(this._id, {
+            ...this.details,
+            ac
+        });
+    };
+
+    setNotes(notes: string) {
+        setCharacterDetails(this._id, {
+            ...this.details,
+            notes
+        });
+    };
 
     setConditions(conditions: string[]) {
         setCharacterConditions(this._id, conditions);
@@ -122,6 +155,5 @@ export class Character extends Subscribable {
         this.details = character.details;
         this._id = character._id;
         this.conditions = character.conditions;
-        this.subscriptionCallbacks = [];
     }
 }
