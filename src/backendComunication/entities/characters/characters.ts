@@ -72,7 +72,6 @@ export async function removeCharacter(characterID: string) {
 }
 
 export function updateData(characters: Character[]) {
-    //torchly.characters.array.push(...characters.map((char: Character) => createCharacter(char)));
 
     for (let char of characters) {
         let oldCharacter = torchly.characters.getByID(char._id);
