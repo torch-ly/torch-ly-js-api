@@ -3,8 +3,9 @@ import {Player} from "../../dataTypes/Player";
 import {apolloClient} from "../initialize";
 import gql from "graphql-tag";
 import logError from "../../error";
-import {createPlayer} from "../../objectFactory";
+import {createCharacter, createPlayer} from "../../objectFactory";
 import {dataChanged} from "../../functions/players";
+import {dataChanged as callSubscribtionCallbacks} from "../../functions/character";
 
 export async function getAllPlayers() {
     try {
@@ -65,9 +66,8 @@ export function subscribePlayer() {
         `
     }).subscribe({
         next({data: {updatePlayer}}) {
-            torchly.players.array = torchly.players.array.filter((player) => player.id !== updatePlayer.id);
-            torchly.players.array.push(createPlayer(updatePlayer));
-            torchly.players.array.sort((a, b) => a.name.localeCompare(b.name));
+            updateOrCreatePlayer(updatePlayer);
+            sortPlayerArray();
         }
     });
 }
@@ -87,8 +87,27 @@ export function subscribeRemovePlayer() {
 }
 
 export function updateData(players: Player[]) {
-    torchly.players.array = players.map((player: Player) => createPlayer(player));
-    players.forEach(player => dataChanged(player.id));
+    players.forEach(player => updateOrCreatePlayer(player));
+    sortPlayerArray();
+}
+
+function updateOrCreatePlayer(player: any) {
+    let oldPlayer = torchly.players.getByID(player.id);
+
+    if (oldPlayer) {
+        oldPlayer = {
+            ...oldPlayer,
+            ...player
+        }
+    } else {
+        torchly.players.array.push(createPlayer(player));
+    }
+
+    callSubscribtionCallbacks(player.id);
+}
+
+function sortPlayerArray() {
+    torchly.players.array.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 export function updateSelf(me: Player) {
