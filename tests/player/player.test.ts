@@ -1,6 +1,6 @@
-import {torchly} from "../src/index";
-import {addPlayer} from "../src/backendComunication/entities/player";
-import {Player} from "../src/dataTypes/Player";
+import {torchly} from "../../src";
+import {addPlayer} from "../../src/backendComunication/entities/player";
+import {Player} from "../../src/dataTypes/Player";
 
 const assert = require('assert');
 
@@ -28,6 +28,21 @@ describe('', () => {
 
             setTimeout(() => {
                 assert(torchly.players.array.length === 1 && torchly.players.array[0].name === "test player");
+                res(null);
+            }, 100);
+
+        })
+            .then(() => done())
+            .catch((err) => done(err));
+    });
+
+    it('change name', (done) => {
+        new Promise((res) => {
+
+            torchly.players.array[0].setName("changed name");
+
+            setTimeout(() => {
+                assert(torchly.players.array.length === 1 && torchly.players.array[0].name === "changed name");
                 res(null);
             }, 100);
 

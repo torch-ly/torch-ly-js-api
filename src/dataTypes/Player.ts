@@ -1,7 +1,7 @@
 import {Character} from "./Character";
 import {torchly} from "../index"
 import {Subscribable} from "./Subscribable";
-import {removePlayer} from "../backendComunication/entities/player";
+import {changePlayerName, removePlayer} from "../backendComunication/entities/player";
 
 export class Player extends Subscribable {
     name: string;
@@ -21,6 +21,10 @@ export class Player extends Subscribable {
 
     delete() {
         removePlayer(this.id);
+    }
+
+    setName(name: string) {
+        changePlayerName(this.id, name);
     }
 
     constructor(player: { name: string; id: string; gm: boolean; }) {

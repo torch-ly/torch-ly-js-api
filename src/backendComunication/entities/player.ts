@@ -57,6 +57,24 @@ export async function removePlayer(id: string) {
     }
 }
 
+export async function changePlayerName(id: string, name: string) {
+    try {
+        await apolloClient.mutate({
+            mutation: gql`
+                mutation changePlayerName($id:String!, $name:String!){
+                    changePlayerName(id:$id, name:$name) {name id gm}
+                }
+            `,
+            variables: {
+                id,
+                name,
+            }
+        });
+    } catch (e) {
+        logError(e);
+    }
+}
+
 export function subscribePlayer() {
     apolloClient.subscribe({
         query: gql`
@@ -94,10 +112,14 @@ export function updateData(players: Player[]) {
 function updateOrCreatePlayer(player: any) {
     let oldPlayer = torchly.players.getByID(player.id);
 
+    delete player.__typename;
+
     if (oldPlayer) {
-        oldPlayer = {
-            ...oldPlayer,
-            ...player
+        for(let prop in player) {
+            if (player.hasOwnProperty(prop)) {
+                // @ts-ignore
+                oldPlayer[prop] = player[prop];
+            }
         }
     } else {
         torchly.players.array.push(createPlayer(player));
