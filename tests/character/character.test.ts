@@ -1,5 +1,4 @@
 import {torchly} from "../../src/index";
-import {addCharacter} from "../../src/backendComunication/entities/characters/characters";
 import {Character} from "../../src/dataTypes/Character";
 import {addPlayer} from "../../src/backendComunication/entities/player";
 import {Player} from "../../src/dataTypes/Player";
@@ -22,7 +21,7 @@ describe('', () => {
     it('push and wait for subscription', (done) => {
         new Promise((res) => {
 
-            addCharacter(new Character({
+            torchly.characters.add(new Character({
                 name: 'Test Character',
                 token: "http://test.test.com",
                 pos: {

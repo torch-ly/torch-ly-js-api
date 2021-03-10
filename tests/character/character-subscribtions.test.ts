@@ -1,5 +1,4 @@
 import {torchly} from "../../src/index";
-import {addCharacter} from "../../src/backendComunication/entities/characters/characters";
 import {Character} from "../../src/dataTypes/Character";
 
 const assert = require('assert');
@@ -21,7 +20,7 @@ describe('', () => {
         new Promise((res) => {
 
             for (let i = 0; i < 3; i++) {
-                addCharacter(new Character({
+                torchly.characters.add(new Character({
                     name: 'Test Character ' + i,
                     token: "http://test.test.com",
                     pos: {point: {x: 0, y: 0,}, rot: 0, size: 1,},
@@ -82,7 +81,7 @@ describe('', () => {
             torchly.characters.array.map((char) => char.delete());
 
             setTimeout(() => {
-                assert(torchly.players.array.length === 0);
+                assert(torchly.characters.array.length === 0);
                 res(null);
             }, 100);
 
