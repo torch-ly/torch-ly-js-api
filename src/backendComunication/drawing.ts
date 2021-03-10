@@ -125,5 +125,7 @@ function addDrawingLocal(drawing: any) {
         torchly.drawing.array.push(new Line(drawing));
     } else if (drawing.type === "circle") {
         torchly.drawing.array.push(new Circle(drawing));
+    } else {
+        logError("Type ", drawing.type, " is not a valid drawing shape type.");
     }
 }
