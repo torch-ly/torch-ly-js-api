@@ -1,7 +1,7 @@
 import { torchly } from "../index";
 import { ApolloClient, DefaultOptions, InMemoryCache } from '@apollo/client/core';
 import gql from "graphql-tag";
-import WebSocket from 'ws';
+import NodeWebSocket from 'ws';
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { SubscriptionClient } from "subscriptions-transport-ws";
 import logError from "../error";
@@ -12,8 +12,9 @@ export let subscriptionClient: SubscriptionClient;
 export default function initializeConnection() {
     let authID = torchly.auth.authID;
 
-    if (apolloClient)
+    if (apolloClient) {
         return;
+    }
 
     subscriptionClient = new SubscriptionClient(torchly.backend.url, {
         reconnect: true,
@@ -22,7 +23,7 @@ export default function initializeConnection() {
         },
         // @ts-ignore
         connectionCallback: error => error && logError("WS connection error: ", error)
-    }, WebSocket);
+    }, typeof window !== 'undefined' ? WebSocket : NodeWebSocket);
 
     const cache = new InMemoryCache();
     const link = new WebSocketLink(subscriptionClient);
