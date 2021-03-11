@@ -13,7 +13,7 @@
   "files": [
     "dist/"
   ],
-  "types": "./src/dataTypes/**/*",
+  "types": "dist/src/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/torch-ly/torch-ly-js-api.git"

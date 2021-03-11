@@ -4,6 +4,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "resolveJsonModule": true,
+    "declaration": true,
     "lib": [
       "dom"
     ]
