@@ -1,6 +1,6 @@
 {
     "name": "torch-ly-js-api",
-    "version": "0.7.3",
+    "version": "0.8.0",
     "description": "",
     "main": "dist/src/index.js",
     "scripts": {
@@ -13,6 +13,7 @@
     "files": [
         "dist/"
     ],
+    "types": "./src/dataTypes/**/*",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/torch-ly/torch-ly-js-api.git"
