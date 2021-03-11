@@ -1,10 +1,8 @@
 import {defaultConfig, initializeTorchly, torchly} from "../src/index";
 
 before(function (done) {
-
-    console.log("Testing torchly API version " + torchly.version + ".\n");
-
     initializeTorchly(defaultConfig).then(() => {
+        console.log("Testing torchly API version " + torchly.version + ".\n");
         done();
     }).catch(() => done());
 });
