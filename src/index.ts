@@ -6,7 +6,7 @@ import {Torchly} from "./dataTypes/Torchly";
 export let torchly: Torchly;
 
 export async function initializeTorchly(config: { backendUrl: string; authID: string; }) {
-    console.log(77)
+
     torchly = new Torchly(config);
 
     initializeBackendCommunication();

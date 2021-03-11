@@ -158,8 +158,6 @@ export class Torchly {
 
         this.errors = <Object[]>[];
 
-        console.log(990, version)
-
         this.version = version;
 
         this.closeConnections = closeConnections;
