@@ -2,7 +2,7 @@
   "name": "torch-ly-js-api",
   "version": "0.7.1",
   "description": "",
-  "main": "index.ts",
+  "main": "dist/src/index.js",
   "scripts": {
     "run": "tsc && node -r dotenv/config dist/src/try.js",
     "auto-test": "mocha --no-parallel -r ts-node/register -r dotenv/config tests/test.ts",
