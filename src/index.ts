@@ -19,6 +19,8 @@ import {apiFunctions as mapsFunctions} from "./functions/maps";
 import {apiFunctions as viewportFunctions} from "./functions/viewport";
 import {apiFunctions as monsterFunctions} from "./functions/lexicon/monster";
 
+import {version} from "../package.json";
+
 export const torchly = {
 
     backend: {
@@ -89,7 +91,7 @@ export const torchly = {
 
     errors: <Object[]>[],
 
-    version: require("../package.json").version,
+    version,
 
     closeConnections
 
