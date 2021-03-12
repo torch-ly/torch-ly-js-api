@@ -9,7 +9,7 @@ function getCharacterByID(id: string): Character | undefined {
 
 let subscribtions = <Function[]>[];
 
-function subscribeChanges(callback: Function) {
+function subscribeChanges(callback: (character: Character | null) => void) {
     subscribtions.push(callback);
 }
 
@@ -19,7 +19,7 @@ function unsubscribeChanges(callback: Function) {
 
 export function dataChanged(characterID: string) {
 
-    subscribtions.forEach((func => func()));
+    subscribtions.forEach((func => func(getCharacterByID(characterID))));
 
     let character = getCharacterByID(characterID);
 
