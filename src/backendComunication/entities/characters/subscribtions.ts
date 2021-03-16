@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import {torchly} from "../../../index";
 import {dataChanged as callSubscribtionCallbacks} from "../../../functions/character";
 import {createCharacter} from "../../../objectFactory";
+import {dataRemoved as callCharacterRemovedCallbacks} from "../../../functions/character";
 
 export function subscribeCharacter() {
     apolloClient.subscribe({
@@ -52,7 +53,7 @@ export function subscribeRemoveCharacter() {
     }).subscribe({
         next({data: {removeCharacter}}) {
             torchly.characters.array = torchly.characters.array.filter(char => char._id !== removeCharacter);
-            //TODO emit change event
+            callCharacterRemovedCallbacks(removeCharacter);
         }
     });
 }

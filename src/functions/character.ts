@@ -26,6 +26,20 @@ export function dataChanged(characterID: string) {
     character?.subscriptionCallbacks.forEach((func) => func(character));
 }
 
+let removeSubscribtions = <Function[]>[];
+
+function onRemove(callback: (id: string) => void) {
+    removeSubscribtions.push(callback);
+}
+
+function offRemove(callback: Function) {
+    removeSubscribtions = removeSubscribtions.filter(func => func !== callback);
+}
+
+export function dataRemoved(id: string) {
+    removeSubscribtions.forEach(func => func(id));
+}
+
 export const apiFunctions = {
     add: addCharacter,
     removeByID: removeCharacter,
@@ -33,5 +47,7 @@ export const apiFunctions = {
     forceUpdateCharacters: getCharacters,
     subscribeChanges,
     unsubscribeChanges,
-    moveRelative: updateRelativeCharacterPosition
+    moveRelative: updateRelativeCharacterPosition,
+    onRemove,
+    offRemove
 }

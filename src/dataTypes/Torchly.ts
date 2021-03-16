@@ -52,7 +52,9 @@ export class Torchly {
         forceUpdateCharacters: Function,
         subscribeChanges: Function,
         unsubscribeChanges: Function,
-        moveRelative: Function
+        moveRelative: Function,
+        onRemove: Function,
+        offRemove: Function
     };
 
     initiative: {
