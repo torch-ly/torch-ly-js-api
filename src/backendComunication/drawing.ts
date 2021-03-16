@@ -5,6 +5,7 @@ import {Drawing} from "../dataTypes/Drawings/Drawing";
 import {torchly} from "../index";
 import {Line} from "../dataTypes/Drawings/Line";
 import {Circle} from "../dataTypes/Drawings/Circle";
+import {dataRemoved} from "../functions/drawing";
 
 export async function getAllDrawingObjects() {
     try {
@@ -110,6 +111,7 @@ export function subscribeRemoveDrawing() {
     }).subscribe({
         next({data: {removeDrawing}}) {
             torchly.drawing.array = torchly.drawing.array.filter((draw) => draw._id !== removeDrawing);
+            dataRemoved(removeDrawing);
         }
     });
 }
@@ -119,13 +121,28 @@ export function updateData(drawing: any[]) {
 }
 
 function addDrawingLocal(drawing: any) {
-    torchly.drawing.array = torchly.drawing.array.filter((draw) => draw._id !== drawing._id);
 
-    if (drawing.type === "line") {
-        torchly.drawing.array.push(new Line(drawing));
-    } else if (drawing.type === "circle") {
-        torchly.drawing.array.push(new Circle(drawing));
+    let oldDrawingObject = torchly.drawing.getByID(drawing._id);
+
+    if (oldDrawingObject) {
+        if (oldDrawingObject.type === drawing.type) {
+            for(let prop in drawing) {
+                if (drawing.hasOwnProperty(prop)) {
+                    // @ts-ignore
+                    oldDrawingObject[prop] = drawing[prop];
+                }
+            }
+        } else {
+            logError("Changing type form", oldDrawingObject.type, "to", drawing.type, "is not supported.");
+        }
     } else {
-        logError("Type ", drawing.type, " is not a valid drawing shape type.");
+        if (drawing.type === "line") {
+            torchly.drawing.array.push(new Line(drawing));
+        } else if (drawing.type === "circle") {
+            torchly.drawing.array.push(new Circle(drawing));
+        } else {
+            logError("Type ", drawing.type, " is not a valid drawing shape type.");
+        }
     }
+
 }

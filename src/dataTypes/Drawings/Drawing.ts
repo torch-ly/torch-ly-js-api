@@ -1,7 +1,7 @@
-import {removePlayer} from "../../backendComunication/entities/player";
 import {removeDrawing} from "../../backendComunication/drawing";
+import {Subscribable} from "../Subscribable";
 
-export abstract class Drawing {
+export abstract class Drawing extends Subscribable {
 
     _id: string;
     type: string;
@@ -11,6 +11,7 @@ export abstract class Drawing {
     }
 
     protected constructor(id: string, type: string) {
+        super();
         this._id = id;
         this.type = type;
     }

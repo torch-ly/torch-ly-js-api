@@ -73,7 +73,12 @@ export class Torchly {
         forceUpdate: Function,
         add: Function,
         remove: Function,
-        removeAll: Function
+        removeAll: Function,
+        getByID: Function,
+        subscribeChanges: Function,
+        unsubscribeChanges: Function,
+        onRemove: Function,
+        offRemove: Function
     };
 
     measurement: {
