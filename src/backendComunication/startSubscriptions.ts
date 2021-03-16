@@ -23,7 +23,7 @@ export default function () {
     subscribePointTo();
     subscribeFogOfWar();
     subscribeViewport();
-    //subscribeBackgroundLayer();
+    subscribeBackgroundLayer();
     subscribeBackgroundLayerObjectUpdate();
     subscribeRemoveBackgroundLayerObject();
 }

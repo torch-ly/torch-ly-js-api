@@ -83,7 +83,15 @@ export function subscribeBackgroundLayer() {
         `
     }).subscribe({
         next({data: {updateBackgroundLayer: {layer}}}) {
-            updateData(layer);
+            torchly.background.array = [];
+
+            for (let obj of layer) {
+                if (obj.type === "image") {
+                    torchly.background.array.push(new Image(obj));
+                } else {
+                    console.error("Unknown background layer object type", obj.type);
+                }
+            }
         }
     });
 }
@@ -97,7 +105,6 @@ export function subscribeBackgroundLayerObjectUpdate() {
         `
     }).subscribe({
         next({data: {updateBackgroundLayerObject}}) {
-            console.log(12345)
             updateOrCreateBackgroundLayerObject(updateBackgroundLayerObject);
         }
     });
@@ -112,7 +119,6 @@ export function subscribeRemoveBackgroundLayerObject() {
         `
     }).subscribe({
         next({data: {removeBackgroundLayerObject}}) {
-            console.log("acc remove")
             // updateOrCreateBackgroundLayerObject(updateBackgroundLayerObject);
             torchly.background.array = torchly.background.array.filter(obj => obj._id !== removeBackgroundLayerObject);
         }
@@ -125,9 +131,6 @@ export function updateData(layer: any[]) {
 
 function updateOrCreateBackgroundLayerObject(object: any) {
     let oldObject = torchly.background.getByID(object._id);
-
-    console.log(oldObject, object)
-
 
     if (oldObject) {
         for(let prop in object) {
