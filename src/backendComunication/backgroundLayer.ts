@@ -5,6 +5,7 @@ import {torchly} from "../index";
 import {Background} from "../dataTypes/Background/Background";
 import {Image} from "../dataTypes/Background/Image";
 import {dataChanged as callSubscribtionCallbacks} from "../functions/background";
+import {dataRemoved as callRemoveCallbacks} from "../functions/background";
 
 export async function getBackgroundLayer() {
     try {
@@ -119,8 +120,8 @@ export function subscribeRemoveBackgroundLayerObject() {
         `
     }).subscribe({
         next({data: {removeBackgroundLayerObject}}) {
-            // updateOrCreateBackgroundLayerObject(updateBackgroundLayerObject);
             torchly.background.array = torchly.background.array.filter(obj => obj._id !== removeBackgroundLayerObject);
+            callRemoveCallbacks(removeBackgroundLayerObject);
         }
     });
 }

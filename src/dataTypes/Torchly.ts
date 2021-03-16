@@ -88,7 +88,9 @@ export class Torchly {
         remove: Function,
         getByID: Function,
         subscribeChanges: Function,
-        unsubscribeChanges: Function
+        unsubscribeChanges: Function,
+        onRemove: Function,
+        offRemove: Function
     };
 
     fogOfWar: {

@@ -27,10 +27,26 @@ export function dataChanged(objectID: string) {
     object?.subscriptionCallbacks.forEach(func => func(object));
 }
 
+let removeSubscribtions = <Function[]>[];
+
+function onRemove(callback: (id: string) => void) {
+    removeSubscribtions.push(callback);
+}
+
+function offRemove(callback: Function) {
+    removeSubscribtions = removeSubscribtions.filter(func => func !== callback);
+}
+
+export function dataRemoved(id: string) {
+    removeSubscribtions.forEach(func => func(id));
+}
+
 export const apiFunctions = {
     getByID: getBackgroundObjectByID,
     add: (obj: Background) => addBackgroundLayerObject(obj),
     remove: removeBackgroundLayerObject,
     subscribeChanges,
-    unsubscribeChanges
+    unsubscribeChanges,
+    onRemove,
+    offRemove
 };
