@@ -3,7 +3,11 @@ import {subscribeInitiative} from "./initiative";
 import {subscribePlayer, subscribeRemovePlayer} from "./entities/player";
 import {subscribeClearAllDrawings, subscribeRemoveDrawing, subscribeUpdateDrawing} from "./drawing";
 import {subscribePointTo} from "./measurements";
-import {subscribeBackgroundLayer} from "./backgroundLayer";
+import {
+    subscribeBackgroundLayer,
+    subscribeBackgroundLayerObjectUpdate,
+    subscribeRemoveBackgroundLayerObject
+} from "./backgroundLayer";
 import {subscribeFogOfWar} from "./fogOfWar";
 import {subscribeViewport} from "./viewport";
 
@@ -17,7 +21,9 @@ export default function () {
     subscribeRemoveDrawing();
     subscribeClearAllDrawings();
     subscribePointTo();
-    subscribeBackgroundLayer();
     subscribeFogOfWar();
     subscribeViewport();
+    //subscribeBackgroundLayer();
+    subscribeBackgroundLayerObjectUpdate();
+    subscribeRemoveBackgroundLayerObject();
 }

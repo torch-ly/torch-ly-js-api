@@ -84,6 +84,9 @@ export class Torchly {
         array: Background[],
         add: Function,
         remove: Function,
+        getByID: Function,
+        subscribeChanges: Function,
+        unsubscribeChanges: Function
     };
 
     fogOfWar: {

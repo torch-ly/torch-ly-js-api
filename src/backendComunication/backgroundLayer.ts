@@ -4,6 +4,7 @@ import logError from "../error";
 import {torchly} from "../index";
 import {Background} from "../dataTypes/Background/Background";
 import {Image} from "../dataTypes/Background/Image";
+import {dataChanged as callSubscribtionCallbacks} from "../functions/background";
 
 export async function getBackgroundLayer() {
     try {
@@ -87,14 +88,63 @@ export function subscribeBackgroundLayer() {
     });
 }
 
-export function updateData(layer: any[]) {
-    torchly.background.array = [];
+export function subscribeBackgroundLayerObjectUpdate() {
+    apolloClient.subscribe({
+        query: gql`
+            subscription {
+                updateBackgroundLayerObject
+            }
+        `
+    }).subscribe({
+        next({data: {updateBackgroundLayerObject}}) {
+            console.log(12345)
+            updateOrCreateBackgroundLayerObject(updateBackgroundLayerObject);
+        }
+    });
+}
 
-    for (let object of layer) {
+export function subscribeRemoveBackgroundLayerObject() {
+    apolloClient.subscribe({
+        query: gql`
+            subscription {
+                removeBackgroundLayerObject
+            }
+        `
+    }).subscribe({
+        next({data: {removeBackgroundLayerObject}}) {
+            console.log("acc remove")
+            // updateOrCreateBackgroundLayerObject(updateBackgroundLayerObject);
+            torchly.background.array = torchly.background.array.filter(obj => obj._id !== removeBackgroundLayerObject);
+        }
+    });
+}
+
+export function updateData(layer: any[]) {
+    layer.forEach((obj) => updateOrCreateBackgroundLayerObject(obj));
+}
+
+function updateOrCreateBackgroundLayerObject(object: any) {
+    let oldObject = torchly.background.getByID(object._id);
+
+    console.log(oldObject, object)
+
+
+    if (oldObject) {
+        for(let prop in object) {
+            if (object.hasOwnProperty(prop)) {
+                // @ts-ignore
+                oldObject[prop] = object[prop];
+            }
+        }
+    } else {
         if (object.type === "image") {
-            torchly.background.array.push(new Image(object));
+            torchly.background.array.push(new Image(object))
         } else {
-            console.error("Type ", object.type, " is not a valid background layer type.");
+            logError("Type ", object.type, " is not a valid background layer type.");
         }
     }
+
+    callSubscribtionCallbacks(object._id);
+
 }
+
