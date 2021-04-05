@@ -41,9 +41,9 @@ export function dataRemoved(id: string) {
 
 export const apiFunctions = {
     forceUpdate: getAllDrawingObjects,
-    add: addDrawing,
+    add: (drawing: Drawing) => addDrawing(drawing),
     remove: removeDrawing,
-    removeAll: clearAllDrawings,
+    removeAll: () => clearAllDrawings(),
     getByID: getDrawingObjectByID,
     subscribeChanges,
     unsubscribeChanges,
