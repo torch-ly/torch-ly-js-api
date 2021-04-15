@@ -1,3 +1,3 @@
-import {defaultConfig, initializeTorchly} from "./index";
+import {defaultConfig, initializeTorchly, torchly} from "./index";
 
 initializeTorchly(defaultConfig);

@@ -1,6 +1,6 @@
 import {Character} from "./Character";
 import {torchly} from "../index"
-import {Subscribable} from "./Subscribable";
+import {Subscribable} from "./Subscribe/Subscribable";
 import {changePlayerName, removePlayer} from "../backendComunication/entities/player";
 
 export class Player extends Subscribable {

@@ -1,4 +1,4 @@
-import {Subscribable} from "./Subscribable";
+import {Subscribable} from "./Subscribe/Subscribable";
 
 export class InitiativeValue extends Subscribable {
     id: string;
