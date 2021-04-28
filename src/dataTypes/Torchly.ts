@@ -19,6 +19,9 @@ import {Player} from "./Player";
 import {version} from "../../package.json";
 
 import {closeConnections} from "../backendComunication/initialize";
+import {EventMap} from "./Subscribe/Events";
+import {Subscribable} from "./Subscribe/Subscribable";
+import {SubscribableEntity, TorchlyEventListener} from "../functions/subscribtions";
 
 export class Torchly {
 
@@ -46,15 +49,15 @@ export class Torchly {
 
     characters: {
         array: Character[],
-        add: Function,
-        removeByID: Function,
-        getByID: Function,
-        forceUpdateCharacters: Function,
-        subscribeChanges: Function,
-        unsubscribeChanges: Function,
-        moveRelative: Function,
-        onRemove: Function,
-        offRemove: Function
+        add: (character: Character) => Promise<void>,
+        removeByID: (characterID: string) => Promise<void>,
+        getByID: (id: string) => (Character | undefined),
+        forceUpdateCharacters: () => Promise<void>,
+        moveRelative: (characterID: string, point: { x: number; y: number }) => Promise<void>,
+
+        on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
+        off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
+        fire: <K extends keyof EventMap>(evtStr: K) => SubscribableEntity
     };
 
     initiative: {
