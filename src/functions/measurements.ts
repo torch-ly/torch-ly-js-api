@@ -1,18 +1,8 @@
 import {pointTo} from "../backendComunication/measurements";
+import {getSubscribtionFunctions, SubscribtionCallback} from "./subscribtions";
+import {torchly} from "../index";
 
-let pointToSubscriptionCallbacks = <Function[]>[];
-
-function subscribePointTo(callback: Function) {
-    pointToSubscriptionCallbacks.push(callback);
-}
-
-function unsubscribePointTo(callback: Function) {
-    pointToSubscriptionCallbacks = pointToSubscriptionCallbacks.filter(func => func !== callback);
-}
-
-export function callPointToSubscribtions(data: {point: {x: number, y: number}, color: string}) {
-    pointToSubscriptionCallbacks.forEach(func => func(data.point, data.color));
-}
+let subsctibtions = <SubscribtionCallback[]>[];
 
 function pointToFunction(pointer: {point: {x: number, y: number}, color: string}) {
     pointTo(pointer);
@@ -20,6 +10,5 @@ function pointToFunction(pointer: {point: {x: number, y: number}, color: string}
 
 export const apiFunctions = {
     pointTo: pointToFunction,
-    subscribePointTo,
-    unsubscribePointTo
+    ...getSubscribtionFunctions(subsctibtions, torchly.measurement)
 };

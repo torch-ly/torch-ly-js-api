@@ -1,20 +1,10 @@
 import {getViewport, updateViewport} from "../backendComunication/viewport";
 import {torchly} from "../index";
 import {Viewport} from "../dataTypes/Viewport";
+import {getSubscribtionFunctions, SubscribtionCallback} from "./subscribtions";
 
-let subscribtionCallback = <Function[]>[];
+let subscribtions = <SubscribtionCallback[]>[];
 
-function subscribe(callback: Function) {
-    subscribtionCallback.push(callback);
-}
-
-function unsubscribe(callback: Function) {
-    subscribtionCallback = subscribtionCallback.filter(func => func !== callback);
-}
-
-export function dataChanged() {
-    subscribtionCallback.forEach((func) => func(torchly.viewport.matrix));
-}
 
 function set(matrix: Viewport) {
     updateViewport(matrix);
@@ -23,6 +13,5 @@ function set(matrix: Viewport) {
 export const apiFunctions = {
     forceUpdate: getViewport,
     set,
-    subscribe,
-    unsubscribe,
+    ...getSubscribtionFunctions(subscribtions, torchly.viewport)
 };

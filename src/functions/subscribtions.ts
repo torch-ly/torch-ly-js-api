@@ -2,7 +2,16 @@ import {EventMap} from "../dataTypes/Subscribe/Events";
 import {torchly} from "../index";
 
 // set of all types this function will work on
-export type SubscribableEntity = (typeof torchly.characters);
+export type SubscribableEntity = (
+    typeof torchly.characters |
+    typeof torchly.players |
+    typeof torchly.drawing |
+    typeof torchly.maps |
+    typeof torchly.background |
+    typeof torchly.viewport |
+    typeof torchly.fogOfWar |
+    typeof torchly.measurement |
+    typeof torchly.initiative);
 
 // redefinition of this types (here they have to operate on the `SubscribableEntity` type instead of the `Subscribable` type
 export type SubscribtionCallback = {type: keyof EventMap, callback: TorchlyEventListener<any>};
