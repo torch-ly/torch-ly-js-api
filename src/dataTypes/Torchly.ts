@@ -45,7 +45,7 @@ export class Torchly {
 
         on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
         off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K) => SubscribableEntity
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
     };
 
     characters: {
@@ -58,7 +58,7 @@ export class Torchly {
 
         on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
         off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K) => SubscribableEntity
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
     };
 
     initiative: {
@@ -71,7 +71,7 @@ export class Torchly {
 
         on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
         off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K) => SubscribableEntity
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
     };
 
     drawing: {
@@ -84,7 +84,7 @@ export class Torchly {
 
         on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
         off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K) => SubscribableEntity
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
     };
 
     measurement: {
@@ -92,7 +92,7 @@ export class Torchly {
 
         on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
         off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K) => SubscribableEntity
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
     };
 
     background: {
@@ -103,7 +103,7 @@ export class Torchly {
 
         on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
         off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K) => SubscribableEntity
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
     };
 
     fogOfWar: {
@@ -115,7 +115,7 @@ export class Torchly {
 
         on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
         off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K) => SubscribableEntity
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
     };
 
     maps: {
@@ -128,7 +128,7 @@ export class Torchly {
 
         on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
         off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K) => SubscribableEntity
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
     };
 
     viewport: {
@@ -138,7 +138,7 @@ export class Torchly {
 
         on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
         off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K) => SubscribableEntity
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
     };
 
     lexicon: {

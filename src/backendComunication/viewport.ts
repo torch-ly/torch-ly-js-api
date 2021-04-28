@@ -3,7 +3,6 @@ import gql from "graphql-tag";
 import logError from "../error";
 import {torchly} from "../index";
 import {Viewport} from "../dataTypes/Viewport";
-import {dataChanged} from "../functions/viewport";
 
 export async function getViewport() {
     try {
@@ -56,5 +55,5 @@ export function subscribeViewport() {
 export function updateData(matrix: Viewport) {
     torchly.viewport.matrix = new Viewport(matrix);
 
-    dataChanged();
+    torchly.viewport.fire("change");
 }

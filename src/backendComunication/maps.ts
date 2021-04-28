@@ -72,5 +72,6 @@ export async function deleteMap(name: string) {
 }
 
 export function updateData(maps: any[]) {
+    // TODO: add events
     torchly.maps.array = maps;
 }

@@ -1,5 +1,5 @@
 import {EventMap} from "../dataTypes/Subscribe/Events";
-import {torchly} from "../index";
+import {Subscribable, torchly} from "../index";
 
 // set of all types this function will work on
 export type SubscribableEntity = (
@@ -15,7 +15,7 @@ export type SubscribableEntity = (
 
 // redefinition of this types (here they have to operate on the `SubscribableEntity` type instead of the `Subscribable` type
 export type SubscribtionCallback = {type: keyof EventMap, callback: TorchlyEventListener<any>};
-export type TorchlyEventListener<This> = (this: This, ev: SubscribableEntity) => void;
+export type TorchlyEventListener<This> = (this: This, ev: SubscribableEntity, target?: Subscribable) => void;
 
 export function getSubscribtionFunctions(
     _subscriptionCallbacks: SubscribtionCallback[],
@@ -45,12 +45,12 @@ export function getSubscribtionFunctions(
         return subscribtionType;
     }
 
-    function fire<K extends keyof EventMap>(evtStr: K): typeof subscribtionType {
+    function fire<K extends keyof EventMap>(evtStr: K, id?: Subscribable): typeof subscribtionType {
         let events = (<string>evtStr).split(" ");
 
         for (let subscribtions of _subscriptionCallbacks) {
             if (events.includes(<string>subscribtions.type)) {
-                subscribtions.callback(subscribtionType);
+                subscribtions.callback(subscribtionType, id);
             }
         }
 

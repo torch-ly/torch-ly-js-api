@@ -1,7 +1,6 @@
 import {apolloClient} from "./initialize";
 import gql from "graphql-tag";
 import logError from "../error";
-import {callPointToSubscribtions} from "../functions/measurements";
 
 export async function pointTo(pointer: {point: {x: number, y: number}, color: string}) {
     try {
@@ -29,7 +28,8 @@ export function subscribePointTo() {
         `
     }).subscribe({
         next({data: {updatePointTo}}) {
-            callPointToSubscribtions(updatePointTo);
+            // TODO: add point to callbacks
+            //callPointToSubscribtions(updatePointTo);
         }
     });
 }

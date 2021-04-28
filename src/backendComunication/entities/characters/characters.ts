@@ -4,7 +4,6 @@ import logError from "../../../error";
 import {torchly} from "../../../index";
 import {Character} from "../../../dataTypes/Character";
 import {createCharacter} from "../../../objectFactory";
-import {dataChanged as callSubscribtionCallbacks} from "../../../functions/character";
 
 export async function getCharacters() {
     try {
@@ -75,17 +74,27 @@ export function updateData(characters: Character[]) {
 
     for (let char of characters) {
         let oldCharacter = torchly.characters.getByID(char._id);
+
         if (oldCharacter) {
+
+            oldCharacter.fire("beforeChange");
+            torchly.characters.fire("beforeChange");
+
             oldCharacter.name = char.name;
             oldCharacter.token = char.token;
             oldCharacter.pos = char.pos;
             oldCharacter.players = char.players;
             oldCharacter.details = char.details;
             oldCharacter.conditions = char.conditions;
+
+            oldCharacter.fire("afterChange change");
+            torchly.characters.fire("afterChange change");
+
         } else {
             torchly.characters.array.push(createCharacter(char));
-        }
-    }
 
-    characters.forEach(char => callSubscribtionCallbacks(char._id));
+            torchly.characters.fire("create", torchly.characters.getByID(char._id));
+        }
+
+    }
 }

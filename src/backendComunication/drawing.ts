@@ -5,7 +5,6 @@ import {Drawing} from "../dataTypes/Drawings/Drawing";
 import {torchly} from "../index";
 import {Line} from "../dataTypes/Drawings/Line";
 import {Circle} from "../dataTypes/Drawings/Circle";
-import {dataRemoved} from "../functions/drawing";
 
 export async function getAllDrawingObjects() {
     try {
@@ -110,8 +109,16 @@ export function subscribeRemoveDrawing() {
         `
     }).subscribe({
         next({data: {removeDrawing}}) {
-            torchly.drawing.array = torchly.drawing.array.filter((draw) => draw._id !== removeDrawing);
-            dataRemoved(removeDrawing);
+            let removedDrawing = torchly.drawing.getByID(removeDrawing);
+
+            if (!removedDrawing) return;
+
+            removedDrawing.fire("beforeRemove remove");
+            torchly.drawing.fire("beforeRemove");
+
+            torchly.drawing.array.splice(torchly.drawing.array.indexOf(removedDrawing), 1);
+
+            torchly.drawing.fire("afterRemove remove");
         }
     });
 }
@@ -126,20 +133,34 @@ function addDrawingLocal(drawing: any) {
 
     if (oldDrawingObject) {
         if (oldDrawingObject.type === drawing.type) {
+
+            oldDrawingObject.fire("beforeChange");
+            torchly.drawing.fire("beforeChange");
+
             for(let prop in drawing) {
                 if (drawing.hasOwnProperty(prop)) {
                     // @ts-ignore
                     oldDrawingObject[prop] = drawing[prop];
                 }
             }
+
+            oldDrawingObject.fire("afterChange change");
+            torchly.drawing.fire("afterChange change");
+
         } else {
             logError("Changing type form", oldDrawingObject.type, "to", drawing.type, "is not supported.");
         }
     } else {
         if (drawing.type === "line") {
+
             torchly.drawing.array.push(new Line(drawing));
+            torchly.drawing.fire("create", torchly.drawing.getByID(drawing));
+
         } else if (drawing.type === "circle") {
+
             torchly.drawing.array.push(new Circle(drawing));
+            torchly.drawing.fire("create", torchly.drawing.getByID(drawing));
+
         } else {
             logError("Type ", drawing.type, " is not a valid drawing shape type.");
         }

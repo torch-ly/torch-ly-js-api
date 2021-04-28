@@ -12,7 +12,8 @@ interface GlobalEventHandlersEventMap {
     "afterChange": Event,
     "beforeRemove": Event,
     "remove": Event,
-    "afterRemove": Event
+    "afterRemove": Event,
+    "create": Event,
 }
 
 export type TorchlyEventListener<This> = (this: This, ev: Subscribable) => void;
