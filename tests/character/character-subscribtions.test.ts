@@ -1,5 +1,6 @@
-import {torchly} from "../../src/index";
-import {Character} from "../../src/dataTypes/Character";
+import {Subscribable, torchly} from "../../src";
+import {Character} from "../../src";
+import {TorchlyEventListener} from "../../src/dataTypes/Subscribe/Events";
 
 const assert = require('assert');
 
@@ -51,7 +52,7 @@ describe('', () => {
 
             let callback = () => res3 = false;
 
-            torchly.characters.array[0].subscribe((character: Character) => res1 = (character.name === "Changed 0"));
+            /*torchly.characters.array[0].subscribe((character: Character) => res1 = (character.name === "Changed 0"));
             torchly.characters.array[0].subscribe(callback);
             torchly.characters.array[0].unsubscribe(callback);
 
@@ -59,7 +60,12 @@ describe('', () => {
             torchly.characters.array[1].subscribe((character: Character) => res2_2 = (character.name === "Changed 1"));
 
             torchly.characters.array[2].subscribe(callback);
-            torchly.characters.array[2].unsubscribe(callback);
+            torchly.characters.array[2].unsubscribe(callback);*/
+
+            //const test2: Subscribable = Character as Subscribable;
+            //const test: TorchlyEventListener<Character> = (ev: (Character)) => {};
+
+            torchly.characters.array[0].on("change", (ev: Character) => {});
 
             for (let i = 0; i < 3; i++) {
                 torchly.characters.array[i].setName("Changed " + i);
