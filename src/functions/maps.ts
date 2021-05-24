@@ -1,6 +1,7 @@
 import {getMaps, loadMap, createMap, deleteMap} from "../backendComunication/maps";
 import {torchly} from "../index";
-import {getSubscribtionFunctions, SubscribtionCallback} from "./subscribtions";
+import {getSubscribtionFunctions} from "./subscribtions";
+import {SubscribtionCallback} from "../dataTypes/Subscribe/Events";
 
 let subscribtions = <SubscribtionCallback[]>[];
 
@@ -14,5 +15,5 @@ export const apiFunctions = {
     add: createMap,
     remove: deleteMap,
     selected,
-    ...getSubscribtionFunctions(subscribtions, torchly.maps)
+    ...getSubscribtionFunctions(subscribtions)
 };

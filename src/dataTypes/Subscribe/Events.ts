@@ -16,4 +16,4 @@ interface GlobalEventHandlersEventMap {
     "create": Event,
 }
 
-export type TorchlyEventListener<This> = (this: This, ev: Subscribable) => void;
+export type TorchlyEventListener<Type extends Subscribable> = (ev: Type) => void;

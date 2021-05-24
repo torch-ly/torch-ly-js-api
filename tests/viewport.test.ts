@@ -1,4 +1,4 @@
-import {torchly} from "../src/index";
+/*import {torchly} from "../src/index";
 import {Line} from "../src/dataTypes/Drawings/Line";
 import {Circle} from "../src/dataTypes/Drawings/Circle";
 import {Viewport} from "../src/dataTypes/Viewport";
@@ -84,3 +84,4 @@ describe('', () => {
             .catch((err) => done(err));
     });
 });
+*/

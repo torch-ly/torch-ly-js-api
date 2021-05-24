@@ -1,6 +1,7 @@
 import {addBackgroundLayerObject, removeBackgroundLayerObject} from "../backendComunication/backgroundLayer";
 import {Background, torchly} from "../index";
-import {getSubscribtionFunctions, SubscribtionCallback} from "./subscribtions";
+import {getSubscribtionFunctions} from "./subscribtions";
+import {SubscribtionCallback} from "../dataTypes/Subscribe/Events";
 
 let subscribtions = <SubscribtionCallback[]>[];
 
@@ -12,5 +13,5 @@ export const apiFunctions = {
     getByID: getBackgroundObjectByID,
     add: (obj: Background) => addBackgroundLayerObject(obj),
     remove: removeBackgroundLayerObject,
-    ...getSubscribtionFunctions(subscribtions, torchly.background)
+    ...getSubscribtionFunctions(subscribtions)
 };

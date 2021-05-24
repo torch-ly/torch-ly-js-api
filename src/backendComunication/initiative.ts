@@ -100,6 +100,7 @@ export function subscribeInitiative() {
 }
 
 export function updateData(initiative: InitiativeValue[]) {
+    /*
     // remove removed values form initiative array
     for (let entry of torchly.initiative.array) {
 
@@ -133,11 +134,12 @@ export function updateData(initiative: InitiativeValue[]) {
             oldEntry.fire("afterChange change");
             torchly.initiative.fire("afterChange");
 
-        } else {
+        } else { // create
             torchly.initiative.array.push(entry);
             torchly.initiative.fire("create", torchly.initiative.getByID(entry.id));
         }
     }
-
-    torchly.initiative.fire("change");
+    //torchly.initiative.fire("change");
+    */
+    torchly.initiative.array = initiative;
 }

@@ -2,7 +2,8 @@ import {torchly} from "../index";
 import {Character} from "../dataTypes/Character";
 import {addCharacter, getCharacters, removeCharacter} from "../backendComunication/entities/characters/characters";
 import {updateRelativeCharacterPosition} from "../backendComunication/entities/characters/characterAttributes";
-import {getSubscribtionFunctions, SubscribtionCallback} from "./subscribtions";
+import {getSubscribtionFunctions} from "./subscribtions";
+import {SubscribtionCallback} from "../dataTypes/Subscribe/Events";
 
 let subscribtions = <SubscribtionCallback[]>[];
 
@@ -16,5 +17,5 @@ export const apiFunctions = {
     getByID: getCharacterByID,
     forceUpdateCharacters: getCharacters,
     moveRelative: updateRelativeCharacterPosition,
-    ...getSubscribtionFunctions(subscribtions, torchly.characters)
+    ...getSubscribtionFunctions(subscribtions)
 }

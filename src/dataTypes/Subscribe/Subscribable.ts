@@ -4,7 +4,7 @@ export abstract class Subscribable {
 
     _subscriptionCallbacks: SubscribtionCallback[];
 
-    on<K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<this>): Subscribable {
+    on<Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>): Subscribable {
         let events = (<string>evtStr).split(" ");
 
         for (let event of events) {
@@ -17,12 +17,12 @@ export abstract class Subscribable {
         return this;
     }
 
-    off<K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<this>): Subscribable {
+    off<Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>): Subscribable {
         let events = (<string>evtStr).split(" ");
 
         for (let event of events) {
             this._subscriptionCallbacks = this._subscriptionCallbacks.filter(
-                (obj: SubscribtionCallback) => obj.type === event && obj.callback === handler);
+                (obj: SubscribtionCallback) => obj.type !== event || obj.callback !== handler);
         }
 
         return this;

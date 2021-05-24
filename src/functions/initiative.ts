@@ -1,12 +1,13 @@
 import {InitiativeValue} from "../dataTypes/InitiativeValue";
 import {torchly} from "../index";
 import {nextInitiativeTurn, orderInitiative} from "../backendComunication/initiative";
-import {getSubscribtionFunctions, SubscribtionCallback} from "./subscribtions";
+import {getSubscribtionFunctions} from "./subscribtions";
+import {SubscribtionCallback} from "../dataTypes/Subscribe/Events";
 
 let subscriptionCallbacks = <SubscribtionCallback[]>[];
 
 function getInitiativeByCharacterID(id: string): InitiativeValue | undefined {
-    return torchly.initiative.array.find(ini => ini.id = id);
+    return torchly.initiative.array.find(ini => ini.id === id);
 }
 
 function addToInitiative(initiative: InitiativeValue) {
@@ -24,5 +25,5 @@ export const apiFunctions = {
     sort: () => orderInitiative(),
     nextTurn: () => nextInitiativeTurn(),
 
-    ...getSubscribtionFunctions(subscriptionCallbacks, torchly.initiative)
+    ...getSubscribtionFunctions(subscriptionCallbacks)
 }

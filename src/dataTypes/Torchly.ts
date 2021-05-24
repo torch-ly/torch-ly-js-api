@@ -19,9 +19,8 @@ import {Player} from "./Player";
 import {version} from "../../package.json";
 
 import {closeConnections} from "../backendComunication/initialize";
-import {EventMap} from "./Subscribe/Events";
+import {EventMap, TorchlyEventListener} from "./Subscribe/Events";
 import {Subscribable} from "./Subscribe/Subscribable";
-import {SubscribableEntity, TorchlyEventListener} from "../functions/subscribtions";
 
 export class Torchly {
 
@@ -43,9 +42,9 @@ export class Torchly {
         getByID: Function,
         add: Function,
 
-        on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     characters: {
@@ -56,22 +55,22 @@ export class Torchly {
         forceUpdateCharacters: () => Promise<void>,
         moveRelative: (characterID: string, point: { x: number; y: number }) => Promise<void>,
 
-        on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     initiative: {
         array: InitiativeValue[],
         add: Function,
         remove: Function,
-        getByID: Function
-        sort: Function,
+        getByID: (id: string) => (InitiativeValue | undefined),
+        sort: () => void,
         nextTurn: Function,
 
-        on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     drawing: {
@@ -82,17 +81,17 @@ export class Torchly {
         removeAll: Function,
         getByID: Function,
 
-        on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     measurement: {
         pointTo: Function,
 
-        on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     background: {
@@ -101,9 +100,9 @@ export class Torchly {
         remove: Function,
         getByID: Function,
 
-        on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     fogOfWar: {
@@ -113,9 +112,9 @@ export class Torchly {
         add: Function,
         remove: Function,
 
-        on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     maps: {
@@ -126,9 +125,9 @@ export class Torchly {
         remove: Function,
         selected: Function,
 
-        on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     viewport: {
@@ -136,9 +135,9 @@ export class Torchly {
         forceUpdate: Function,
         set: Function,
 
-        on: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        off: <K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<SubscribableEntity>) => SubscribableEntity,
-        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => SubscribableEntity
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     lexicon: {

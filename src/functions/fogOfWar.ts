@@ -1,6 +1,6 @@
 import {setFogOfWar, getFogOfWar, addFogOfWarObject, removeFogOfWarObject} from "../backendComunication/fogOfWar"
-import {getSubscribtionFunctions, SubscribtionCallback} from "./subscribtions";
-import {torchly} from "../index";
+import {getSubscribtionFunctions} from "./subscribtions";
+import {SubscribtionCallback} from "../dataTypes/Subscribe/Events";
 
 let subscribtions = <SubscribtionCallback[]>[];
 
@@ -9,5 +9,5 @@ export const apiFunctions = {
     forceUpdate: getFogOfWar,
     add: addFogOfWarObject,
     remove: removeFogOfWarObject,
-    ...getSubscribtionFunctions(subscribtions, torchly.fogOfWar)
+    ...getSubscribtionFunctions(subscribtions)
 };

@@ -1,6 +1,6 @@
 import {pointTo} from "../backendComunication/measurements";
-import {getSubscribtionFunctions, SubscribtionCallback} from "./subscribtions";
-import {torchly} from "../index";
+import {getSubscribtionFunctions} from "./subscribtions";
+import {SubscribtionCallback} from "../dataTypes/Subscribe/Events";
 
 let subsctibtions = <SubscribtionCallback[]>[];
 
@@ -10,5 +10,5 @@ function pointToFunction(pointer: {point: {x: number, y: number}, color: string}
 
 export const apiFunctions = {
     pointTo: pointToFunction,
-    ...getSubscribtionFunctions(subsctibtions, torchly.measurement)
+    ...getSubscribtionFunctions(subsctibtions)
 };

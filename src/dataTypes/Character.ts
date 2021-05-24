@@ -8,7 +8,7 @@ import {
     setCharacterPosition, updateRelativeCharacterPosition
 } from "../backendComunication/entities/characters/characterAttributes";
 import {Player} from "./Player";
-import {Subscribable} from "./Subscribe/Subscribable";
+import {Subscribable} from "../../src/dataTypes/Subscribe/Subscribable";
 import {addToInitiative} from "../backendComunication/initiative";
 import {InitiativeValue} from "./InitiativeValue";
 

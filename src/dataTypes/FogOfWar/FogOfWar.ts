@@ -1,7 +1,7 @@
 import {removeFogOfWarObject} from "../../backendComunication/fogOfWar";
-import {Subscribable} from "../../index";
+import {Subscribable} from "../Subscribe/Subscribable";
 
-export abstract class FogOfWar extends Subscribable{
+export abstract class FogOfWar extends Subscribable {
 
     type: string;
     _id: string;

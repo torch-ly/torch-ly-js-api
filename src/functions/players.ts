@@ -2,7 +2,8 @@ import {addPlayer, getAllPlayers} from "../backendComunication/entities/player";
 import {Character} from "../dataTypes/Character";
 import {torchly} from "../index";
 import {Player} from "../dataTypes/Player";
-import {getSubscribtionFunctions, SubscribtionCallback} from "./subscribtions";
+import {getSubscribtionFunctions} from "./subscribtions";
+import {SubscribtionCallback} from "../dataTypes/Subscribe/Events";
 
 let subscribtions = <SubscribtionCallback[]>[];
 
@@ -26,5 +27,5 @@ export const apiFunctions = {
     forceUpdatePlayers: getAllPlayers,
     getByID: getPlayerByID,
     add: (player: Player) => addPlayer(player),
-    ...getSubscribtionFunctions(subscribtions, torchly.players)
+    ...getSubscribtionFunctions(subscribtions)
 }

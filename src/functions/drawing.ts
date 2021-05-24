@@ -1,7 +1,8 @@
 import {addDrawing, clearAllDrawings, getAllDrawingObjects, removeDrawing} from "../backendComunication/drawing";
 import {torchly} from "../index";
 import {Drawing} from "../dataTypes/Drawings/Drawing";
-import {getSubscribtionFunctions, SubscribtionCallback} from "./subscribtions";
+import {getSubscribtionFunctions} from "./subscribtions";
+import {SubscribtionCallback} from "../dataTypes/Subscribe/Events";
 
 let subscribtions = <SubscribtionCallback[]>[];
 
@@ -15,5 +16,5 @@ export const apiFunctions = {
     remove: removeDrawing,
     removeAll: () => clearAllDrawings(),
     getByID: getDrawingObjectByID,
-    ...getSubscribtionFunctions(subscribtions, torchly.drawing)
+    ...getSubscribtionFunctions(subscribtions)
 }
