@@ -20,7 +20,7 @@ export function getSubscribtionFunctions(_subscriptionCallbacks: SubscribtionCal
 
         for (let event of events) {
             _subscriptionCallbacks = _subscriptionCallbacks.filter(
-                (obj: SubscribtionCallback) => obj.type === event && obj.callback === handler);
+                (obj: SubscribtionCallback) => obj.type !== event || obj.callback !== handler);
         }
 
     }

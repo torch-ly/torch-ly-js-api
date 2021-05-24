@@ -1,7 +1,5 @@
-/*import {torchly} from "../src/index";
-import {Line} from "../src/dataTypes/Drawings/Line";
-import {Circle} from "../src/dataTypes/Drawings/Circle";
-import {Viewport} from "../src/dataTypes/Viewport";
+import {torchly} from "../src";
+import {Viewport} from "../src";
 
 const assert = require('assert');
 
@@ -46,13 +44,13 @@ describe('', () => {
             let res2 = false;
             let res3 = true
 
-            torchly.viewport.subscribe(() => res1 = true);
-            torchly.viewport.subscribe(() => res2 = true);
+            torchly.viewport.on("change", () => res1 = true);
+            torchly.viewport.on("change", () => res2 = true);
 
             let func = () => res3 = false;
 
-            torchly.viewport.subscribe(func);
-            torchly.viewport.unsubscribe(func);
+            torchly.viewport.on("change", func);
+            torchly.viewport.off("change", func);
 
             torchly.viewport.set(new Viewport({scale: {x: 0.5, y: 1.5}, x: 5, y: 10}));
 
@@ -84,4 +82,3 @@ describe('', () => {
             .catch((err) => done(err));
     });
 });
-*/
