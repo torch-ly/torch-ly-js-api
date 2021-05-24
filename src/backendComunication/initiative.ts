@@ -3,7 +3,6 @@ import gql from "graphql-tag";
 import logError from "../error";
 import {torchly} from "../index";
 import {InitiativeValue} from "../dataTypes/InitiativeValue";
-import {dataChanged} from "../functions/initiative";
 
 export async function getInitiative() {
     try {
@@ -101,6 +100,46 @@ export function subscribeInitiative() {
 }
 
 export function updateData(initiative: InitiativeValue[]) {
-    torchly.initiative.array = initiative.map((ini: InitiativeValue) => new InitiativeValue(ini));
-    dataChanged();
+    /*
+    // remove removed values form initiative array
+    for (let entry of torchly.initiative.array) {
+
+        // entry id is still in new initiative
+        if (initiative.filter((ini) => ini.id === entry.id).length > 0) continue;
+
+        entry.fire("beforeRemove remove");
+        entry.fire("beforeRemove");
+
+        // remove the entry
+        torchly.initiative.array.splice(torchly.initiative.array.indexOf(entry), 1);
+
+        torchly.initiative.fire("afterRemove remove");
+    }
+
+    // update or create initiative values
+    for (let entry of initiative) {
+        let oldEntry = torchly.initiative.getByID(entry.id);
+
+        if (oldEntry) { // update
+            oldEntry.fire("beforeChange");
+            torchly.initiative.fire("beforeChange");
+
+            for(let prop in entry) {
+                if (entry.hasOwnProperty(prop)) {
+                    // @ts-ignore
+                    oldEntry[prop] = entry[prop];
+                }
+            }
+
+            oldEntry.fire("afterChange change");
+            torchly.initiative.fire("afterChange");
+
+        } else { // create
+            torchly.initiative.array.push(entry);
+            torchly.initiative.fire("create", torchly.initiative.getByID(entry.id));
+        }
+    }
+    //torchly.initiative.fire("change");
+    */
+    torchly.initiative.array = initiative;
 }

@@ -47,15 +47,15 @@ describe('', () => {
 
             let callback = () => res3 = false;
 
-            torchly.players.array[0].subscribe((player: Player) => res1 = (player.name === "Changed 0"));
-            torchly.players.array[0].subscribe(callback);
-            torchly.players.array[0].unsubscribe(callback);
+            torchly.players.array[0].on("change", (player: Player) => res1 = (player.name === "Changed 0"));
+            torchly.players.array[0].on("change", callback);
+            torchly.players.array[0].off("change", callback);
 
-            torchly.players.array[1].subscribe((player: Player) => res2_1 = (player.name === "Changed 1"));
-            torchly.players.array[1].subscribe((player: Player) => res2_2 = (player.name === "Changed 1"));
+            torchly.players.array[1].on("change", (player: Player) => res2_1 = (player.name === "Changed 1"));
+            torchly.players.array[1].on("change", (player: Player) => res2_2 = (player.name === "Changed 1"));
 
-            torchly.players.array[2].subscribe(callback);
-            torchly.players.array[2].unsubscribe(callback);
+            torchly.players.array[2].on("change", callback);
+            torchly.players.array[2].off("change", callback);
 
             for (let i = 0; i < 3; i++) {
                 torchly.players.array[i].setName("Changed " + i);

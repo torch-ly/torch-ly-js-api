@@ -1,4 +1,4 @@
-import {Subscribable} from "../Subscribable";
+import {Subscribable} from "../Subscribe/Subscribable";
 import {addBackgroundLayerObject, removeBackgroundLayerObject} from "../../backendComunication/backgroundLayer";
 
 export abstract class Background extends Subscribable {

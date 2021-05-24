@@ -19,6 +19,8 @@ import {Player} from "./Player";
 import {version} from "../../package.json";
 
 import {closeConnections} from "../backendComunication/initialize";
+import {EventMap, TorchlyEventListener} from "./Subscribe/Events";
+import {Subscribable} from "./Subscribe/Subscribable";
 
 export class Torchly {
 
@@ -38,34 +40,37 @@ export class Torchly {
         getCharactersByPlayerID: Function,
         forceUpdatePlayers: Function,
         getByID: Function,
-        subscribeChanges: Function,
-        unsubscribeChanges: Function,
-        dataChanged: Function,
-        add: Function
+        add: Function,
+
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     characters: {
         array: Character[],
-        add: Function,
-        removeByID: Function,
-        getByID: Function,
-        forceUpdateCharacters: Function,
-        subscribeChanges: Function,
-        unsubscribeChanges: Function,
-        moveRelative: Function,
-        onRemove: Function,
-        offRemove: Function
+        add: (character: Character) => Promise<void>,
+        removeByID: (characterID: string) => Promise<void>,
+        getByID: (id: string) => (Character | undefined),
+        forceUpdateCharacters: () => Promise<void>,
+        moveRelative: (characterID: string, point: { x: number; y: number }) => Promise<void>,
+
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     initiative: {
         array: InitiativeValue[],
         add: Function,
         remove: Function,
-        getByID: Function,
-        subscribeChanges: Function,
-        unsubscribeChanges: Function,
-        sort: Function,
+        getByID: (id: string) => (InitiativeValue | undefined),
+        sort: () => void,
         nextTurn: Function,
+
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     drawing: {
@@ -75,16 +80,19 @@ export class Torchly {
         remove: Function,
         removeAll: Function,
         getByID: Function,
-        subscribeChanges: Function,
-        unsubscribeChanges: Function,
-        onRemove: Function,
-        offRemove: Function
+
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     measurement: {
         pointTo: Function,
-        subscribePointTo: Function,
-        unsubscribePointTo: Function
+        pointToData: {point: {x: number, y: number}, color: string} | undefined,
+
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     background: {
@@ -92,10 +100,10 @@ export class Torchly {
         add: Function,
         remove: Function,
         getByID: Function,
-        subscribeChanges: Function,
-        unsubscribeChanges: Function,
-        onRemove: Function,
-        offRemove: Function
+
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     fogOfWar: {
@@ -103,7 +111,11 @@ export class Torchly {
         set: Function,
         forceUpdate: Function,
         add: Function,
-        remove: Function
+        remove: Function,
+
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     maps: {
@@ -113,14 +125,20 @@ export class Torchly {
         add: Function,
         remove: Function,
         selected: Function,
+
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     viewport: {
         matrix: Viewport,
         forceUpdate: Function,
         set: Function,
-        subscribe: Function,
-        unsubscribe: Function,
+
+        on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
+        fire: <K extends keyof EventMap>(evtStr: K, id?: Subscribable) => void
     };
 
     lexicon: {
@@ -154,7 +172,7 @@ export class Torchly {
 
         this.drawing = {array: <Drawing[]>[], ...drawingFunctions};
 
-        this.measurement = {...measurementFunctions};
+        this.measurement = {pointToData: undefined, ...measurementFunctions};
 
         this.background = {array: <Background[]>[], ...backgroundFunctions};
 

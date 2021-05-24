@@ -1,6 +1,6 @@
-import {torchly} from "../src/index";
+import {torchly} from "../src";
 import {addCharacter} from "../src/backendComunication/entities/characters/characters";
-import {Character} from "../src/dataTypes/Character";
+import {Character} from "../src";
 
 const assert = require('assert');
 

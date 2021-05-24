@@ -12,7 +12,7 @@ import {Polygon} from "./dataTypes/FogOfWar/Polygon";
 import {Character} from "./dataTypes/Character";
 import {InitiativeValue} from "./dataTypes/InitiativeValue";
 import {Player} from "./dataTypes/Player";
-import {Subscribable} from "./dataTypes/Subscribable";
+import {Subscribable} from "./dataTypes/Subscribe/Subscribable";
 import {Viewport} from "./dataTypes/Viewport";
 
 export {Background, Image, Circle, Drawing, Line, FogOfWar, Polygon, Character, InitiativeValue, Player, Subscribable, Viewport, Torchly}

@@ -88,6 +88,7 @@ export function subscribeFogOfWar() {
 }
 
 export function updateData(shapes: any[]) {
+    //TODO: add events
     torchly.fogOfWar.array = [];
 
     for (let shape of shapes) {

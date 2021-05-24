@@ -1,6 +1,7 @@
 import {removeFogOfWarObject} from "../../backendComunication/fogOfWar";
+import {Subscribable} from "../Subscribe/Subscribable";
 
-export abstract class FogOfWar {
+export abstract class FogOfWar extends Subscribable {
 
     type: string;
     _id: string;
@@ -10,6 +11,7 @@ export abstract class FogOfWar {
     }
 
     protected constructor(_id: string, type: string) {
+        super();
         this._id = _id;
         this.type = type;
     }

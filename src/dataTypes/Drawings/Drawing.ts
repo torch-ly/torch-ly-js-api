@@ -1,5 +1,5 @@
 import {removeDrawing} from "../../backendComunication/drawing";
-import {Subscribable} from "../Subscribable";
+import {Subscribable} from "../Subscribe/Subscribable";
 
 export abstract class Drawing extends Subscribable {
 

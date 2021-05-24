@@ -4,7 +4,6 @@ import {apolloClient} from "../initialize";
 import gql from "graphql-tag";
 import logError from "../../error";
 import {createPlayer} from "../../objectFactory";
-import {dataChanged as callSubscribtionCallbacks} from "../../functions/players";
 
 export async function getAllPlayers() {
     try {
@@ -114,17 +113,23 @@ function updateOrCreatePlayer(player: any) {
     delete player.__typename;
 
     if (oldPlayer) {
+
+        oldPlayer.fire("beforeChange");
+        torchly.players.fire("beforeChange");
+
         for(let prop in player) {
             if (player.hasOwnProperty(prop)) {
                 // @ts-ignore
                 oldPlayer[prop] = player[prop];
             }
         }
+
+        oldPlayer.fire("afterChange change");
+        torchly.players.fire("afterChange change");
+
     } else {
         torchly.players.array.push(createPlayer(player));
     }
-
-    callSubscribtionCallbacks(player.id);
 }
 
 function sortPlayerArray() {
