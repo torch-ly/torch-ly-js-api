@@ -14,6 +14,7 @@ interface GlobalEventHandlersEventMap {
     "remove": Event,
     "afterRemove": Event,
     "create": Event,
+    "pointTo": Event
 }
 
 export type TorchlyEventListener<Type extends Subscribable> = (ev: Type) => void;

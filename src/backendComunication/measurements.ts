@@ -1,6 +1,7 @@
 import {apolloClient} from "./initialize";
 import gql from "graphql-tag";
 import logError from "../error";
+import {torchly} from "../index";
 
 export async function pointTo(pointer: {point: {x: number, y: number}, color: string}) {
     try {
@@ -28,8 +29,8 @@ export function subscribePointTo() {
         `
     }).subscribe({
         next({data: {updatePointTo}}) {
-            // TODO: add point to callbacks
-            //callPointToSubscribtions(updatePointTo);
+            torchly.measurement.pointToData = updatePointTo;
+            torchly.measurement.fire("pointTo");
         }
     });
 }

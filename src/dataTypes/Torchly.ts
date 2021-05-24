@@ -88,6 +88,7 @@ export class Torchly {
 
     measurement: {
         pointTo: Function,
+        pointToData: {point: {x: number, y: number}, color: string} | undefined,
 
         on: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
         off: <Type extends Subscribable, K extends keyof EventMap>(evtStr: K, handler: TorchlyEventListener<Type>) => void,
@@ -171,7 +172,7 @@ export class Torchly {
 
         this.drawing = {array: <Drawing[]>[], ...drawingFunctions};
 
-        this.measurement = {...measurementFunctions};
+        this.measurement = {pointToData: undefined, ...measurementFunctions};
 
         this.background = {array: <Background[]>[], ...backgroundFunctions};
 

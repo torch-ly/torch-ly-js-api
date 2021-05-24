@@ -1,4 +1,4 @@
-/*import {torchly} from "../src/index";
+import {torchly} from "../src/index";
 
 const assert = require('assert');
 
@@ -11,13 +11,17 @@ describe('', () => {
             let res2 = false;
             let res3 = true;
 
-            torchly.measurement.subscribePointTo((point: {x: number, y: number}, color: string) => res1 = (point.x === 1 && point.y === 2 && color === "color"));
-            torchly.measurement.subscribePointTo((point: {x: number, y: number}, color: string) => res2 = (point.x === 1 && point.y === 2 && color === "color"));
+            torchly.measurement.on("pointTo", () => res1 = (torchly.measurement.pointToData?.point.x === 1
+                && torchly.measurement.pointToData?.point.y === 2
+                && torchly.measurement.pointToData?.color === "color"));
+            torchly.measurement.on("pointTo",() => res2 = (torchly.measurement.pointToData?.point.x === 1
+                && torchly.measurement.pointToData?.point.y === 2
+                && torchly.measurement.pointToData?.color === "color"));
 
             let func = () => res3 = false;
 
-            torchly.measurement.subscribePointTo(func);
-            torchly.measurement.unsubscribePointTo(func);
+            torchly.measurement.on("pointTo", func);
+            torchly.measurement.off("pointTo", func);
 
             torchly.measurement.pointTo({point: {x: 1, y: 2}, color: "color"})
 
@@ -31,4 +35,3 @@ describe('', () => {
             .catch((err) => done(err));
     });
 });
-*/
